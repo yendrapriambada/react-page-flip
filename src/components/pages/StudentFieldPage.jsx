@@ -2,7 +2,8 @@ import { forwardRef, useEffect, useState } from 'react'
 
 const StudentFieldPage = forwardRef(function StudentFieldPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
-  const [displayedText, setDisplayedText] = useState('')
+  const [isFinished, setIsFinished] = useState(false)
+  const [displayedText, setDisplayedText] = useState('Klik play untuk memutar teks...')
 
   const fullText =
     'Pada mata kuliah Pendidikan IPA Terpadu, mahasiswa diminta untuk mengerjakan tugas dengan tema Teknologi Ramah Lingkungan untuk Irigasi.\n\n' +
@@ -13,6 +14,7 @@ const StudentFieldPage = forwardRef(function StudentFieldPage(props, ref) {
     if (!isPlaying) {
       setDisplayedText('')
       setIsPlaying(true)
+      setIsFinished(false)
     }
   }
 
@@ -29,6 +31,9 @@ const StudentFieldPage = forwardRef(function StudentFieldPage(props, ref) {
 
       if (index >= fullText.length) {
         clearInterval(intervalId)
+        setIsFinished(true)
+        // Keep playing true or set false? If false, play button logic needs check.
+        // But we hide the button when isFinished is true.
       }
     }, 35)
 
@@ -63,10 +68,11 @@ const StudentFieldPage = forwardRef(function StudentFieldPage(props, ref) {
                 className={`student-text-wrapper ${
                   isPlaying ? 'student-text-animate' : ''
                 }`}
+                style={isFinished ? { maxHeight: 'none', flex: 1 } : {}}
               >
                 <div className="student-text-inner">
-                  {displayedText.split('\n\n').map((block) => (
-                    <p key={block}>{block}</p>
+                  {displayedText.split('\n\n').map((block, idx) => (
+                    <p key={idx}>{block}</p>
                   ))}
                 </div>
               </div>
@@ -74,16 +80,18 @@ const StudentFieldPage = forwardRef(function StudentFieldPage(props, ref) {
           </div>
         </div>
 
-        <button
-          type="button"
-          className={`student-play-button ${
-            isPlaying ? 'student-play-button-active' : ''
-          }`}
-          onClick={handlePlayClick}
-          disabled={isPlaying}
-        >
-          {isPlaying ? 'Listening...' : '▶ Play'}
-        </button>
+        {!isFinished && (
+          <button
+            type="button"
+            className={`student-play-button ${
+              isPlaying ? 'student-play-button-active' : ''
+            }`}
+            onClick={handlePlayClick}
+            disabled={isPlaying}
+          >
+            {isPlaying ? 'Listening...' : '▶ Play'}
+          </button>
+        )}
       </div>
     </div>
   )

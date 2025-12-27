@@ -1,9 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
 import HTMLFlipBook from 'react-pageflip'
 import CoverPage from './pages/CoverPage'
+import AnnouncementPage from './pages/AnnouncementPage'
 import StudentFieldPage from './pages/StudentFieldPage'
 import TeacherTaskPage from './pages/TeacherTaskPage'
 import ContextPage from './pages/ContextPage'
+import SpeechTextPage from './pages/SpeechTextPage'
+import SolutionEvaluationPage from './pages/SolutionEvaluationPage'
+import TechnologyImpactPage from './pages/TechnologyImpactPage'
+import ObservationSpeechPage from './pages/ObservationSpeechPage'
+import GroupDataPage from './pages/GroupDataPage'
+import GraphAnalysisPage from './pages/GraphAnalysisPage'
+import VideoGalleryPage from './pages/VideoGalleryPage'
+import ExpertOpinionPage from './pages/ExpertOpinionPage'
 import IntroImagePage from './pages/IntroImagePage'
 import ExperiencePage from './pages/ExperiencePage'
 import QuestionPage from './pages/QuestionPage'
@@ -57,7 +66,18 @@ function Book() {
 
   const handleNext = () => {
     if (bookRef.current) {
-      bookRef.current.pageFlip().flipNext()
+      const pageFlip = bookRef.current.pageFlip()
+      if (pageFlip) {
+        const current = pageFlip.getCurrentPageIndex()
+        const total = pageFlip.getPageCount()
+        // Prevent looping: only flip if not at the last page
+        // Note: page index is 0-based.
+        // For double page view, we might need to be careful, but flipNext handles it usually.
+        // However, if the user experiences looping, explicitly checking is safer.
+        if (current < total - 1) {
+          pageFlip.flipNext()
+        }
+      }
     }
   }
 
@@ -92,19 +112,30 @@ function Book() {
         showCover
         showPageCorners
         mobileScrollSupport
-        disableFlipByClick={inputMode}
+        disableFlipByClick={false}
         swipeDistance={80}
-        useMouseEvents={!inputMode}
+        useMouseEvents={true}
         className="flipbook-book"
       >
         <CoverPage />
+        
         <StudentFieldPage />
         <TeacherTaskPage />
         <ContextPage />
-        <IntroImagePage />
-        <ExperiencePage story={story} onStoryChange={handleStoryChange} />
-        <AnswerFormPage onInputFocusChange={setInputMode} />
-        <QuestionPage />
+        
+        {/* <IntroImagePage /> */}
+        {/* <ExperiencePage story={story} onStoryChange={handleStoryChange} /> */}
+        <AnswerFormPage />
+        <SpeechTextPage />
+        <ExpertOpinionPage />
+        <SolutionEvaluationPage />
+        <TechnologyImpactPage />
+        <ObservationSpeechPage />
+        <GroupDataPage />
+        <GraphAnalysisPage />
+        <VideoGalleryPage />
+        <AnnouncementPage />
+        {/* <QuestionPage /> */}
       </HTMLFlipBook>
 
       <footer className="flipbook-footer">

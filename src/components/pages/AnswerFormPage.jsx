@@ -36,11 +36,10 @@ const AnswerFormPage = forwardRef(function AnswerFormPage(props, ref) {
                 placeholder="Jawaban Anda..."
                 value={val}
                 onChange={(e) => handleChange(idx, e.target.value)}
-                onPointerDown={stopFlipPropagation}
-                onMouseDown={stopFlipPropagation}
-                onTouchStart={stopFlipPropagation}
-                onFocus={() => onInputFocusChange?.(true)}
-                onBlur={() => onInputFocusChange?.(false)}
+                onPointerDownCapture={stopFlipPropagation}
+                onMouseDownCapture={stopFlipPropagation}
+                onTouchStartCapture={stopFlipPropagation}
+                autoComplete="off"
               />
             ))}
           </div>
