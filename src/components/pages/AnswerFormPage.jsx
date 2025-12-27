@@ -1,15 +1,12 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
+import { useAnswers } from '../../context/AnswersContext'
 
 const AnswerFormPage = forwardRef(function AnswerFormPage(props, ref) {
   const { onInputFocusChange } = props
-  const [answers, setAnswers] = useState(Array(6).fill(''))
+  const { answers: ctxAnswers, setQ1At } = useAnswers()
 
   const handleChange = (index, value) => {
-    setAnswers((prev) => {
-      const next = [...prev]
-      next[index] = value
-      return next
-    })
+    setQ1At(index, value)
   }
 
   const stopFlipPropagation = (e) => {
@@ -28,7 +25,7 @@ const AnswerFormPage = forwardRef(function AnswerFormPage(props, ref) {
             Menurutmu, apa saja permasalahan yang dihadapi di dalam wacana?
           </h3>
           <div className="answers-grid">
-            {answers.map((val, idx) => (
+            {ctxAnswers.q1.map((val, idx) => (
               <input
                 key={idx}
                 type="text"

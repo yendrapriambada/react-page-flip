@@ -1,8 +1,8 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
+import { useAnswers } from '../../context/AnswersContext'
 
 const GraphAnalysisPage = forwardRef(function GraphAnalysisPage(props, ref) {
-  const [answer1, setAnswer1] = useState('')
-  const [answer2, setAnswer2] = useState('')
+  const { answers, setQ3Analysis, setQ3PeerReview } = useAnswers()
 
   const stopFlipPropagation = (e) => {
     e.stopPropagation()
@@ -19,8 +19,8 @@ const GraphAnalysisPage = forwardRef(function GraphAnalysisPage(props, ref) {
               <textarea
                 className="analysis-textarea"
                 placeholder="Jawaban Anda...."
-                value={answer1}
-                onChange={(e) => setAnswer1(e.target.value)}
+                value={answers.q3.analysis}
+                onChange={(e) => setQ3Analysis(e.target.value)}
                 onPointerDownCapture={stopFlipPropagation}
                 onMouseDownCapture={stopFlipPropagation}
                 onTouchStartCapture={stopFlipPropagation}
@@ -37,8 +37,8 @@ const GraphAnalysisPage = forwardRef(function GraphAnalysisPage(props, ref) {
               <textarea
                 className="analysis-textarea"
                 placeholder="Jawaban Anda...."
-                value={answer2}
-                onChange={(e) => setAnswer2(e.target.value)}
+                value={answers.q3.peerReview}
+                onChange={(e) => setQ3PeerReview(e.target.value)}
                 onPointerDownCapture={stopFlipPropagation}
                 onMouseDownCapture={stopFlipPropagation}
                 onTouchStartCapture={stopFlipPropagation}

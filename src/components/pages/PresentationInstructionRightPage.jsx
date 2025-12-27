@@ -1,9 +1,8 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
+import { useAnswers } from '../../context/AnswersContext'
 
 const PresentationInstructionRightPage = forwardRef(function PresentationInstructionRightPage(props, ref) {
-  const [willDelegate, setWillDelegate] = useState(null)
-  const [reason, setReason] = useState('')
-  const [workLink, setWorkLink] = useState('')
+  const { answers, setQ6WillDelegate, setQ6Reason, setQ6WorkLink } = useAnswers()
 
   const stopFlipPropagation = (e) => {
     e.stopPropagation()
@@ -21,37 +20,37 @@ const PresentationInstructionRightPage = forwardRef(function PresentationInstruc
           <div className="evaluation-choices">
             <button
               type="button"
-              className={`evaluation-btn evaluation-btn-yes ${willDelegate === true ? 'evaluation-selected' : ''}`}
+              className={`evaluation-btn evaluation-btn-yes ${answers.q6.willDelegate === true ? 'evaluation-selected' : ''}`}
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
-              onClick={() => setWillDelegate(true)}
+              onClick={() => setQ6WillDelegate(true)}
             >
-              {willDelegate === true ? 'Ya (✓)' : 'Ya'}
+              {answers.q6.willDelegate === true ? 'Ya (✓)' : 'Ya'}
             </button>
             <button
               type="button"
-              className={`evaluation-btn evaluation-btn-no ${willDelegate === false ? 'evaluation-selected' : ''}`}
+              className={`evaluation-btn evaluation-btn-no ${answers.q6.willDelegate === false ? 'evaluation-selected' : ''}`}
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
-              onClick={() => setWillDelegate(false)}
+              onClick={() => setQ6WillDelegate(false)}
             >
-              {willDelegate === false ? 'Tidak (✓)' : 'Tidak'}
+              {answers.q6.willDelegate === false ? 'Tidak (✓)' : 'Tidak'}
             </button>
           </div>
           <div className="evaluation-input-wrapper">
             <label>
-              {willDelegate === null
+              {answers.q6.willDelegate === null
                 ? 'Tuliskan alasanmu di sini'
-                : willDelegate
+                : answers.q6.willDelegate
                 ? 'Mengapa memilih membagi tugas?'
                 : 'Mengapa tidak membagi tugas?'}
             </label>
             <textarea
               placeholder="Tuliskan alasanmu di sini"
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}
+              value={answers.q6.reason}
+              onChange={(e) => setQ6Reason(e.target.value)}
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
@@ -73,8 +72,8 @@ const PresentationInstructionRightPage = forwardRef(function PresentationInstruc
             <label>Tuliskan link hasil kerja di sini</label>
             <textarea
               placeholder="Tuliskan link hasil kerja di sini"
-              value={workLink}
-              onChange={(e) => setWorkLink(e.target.value)}
+              value={answers.q6.workLink}
+              onChange={(e) => setQ6WorkLink(e.target.value)}
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}

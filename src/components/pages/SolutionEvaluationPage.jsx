@@ -1,11 +1,11 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
+import { useAnswers } from '../../context/AnswersContext'
 
 const SolutionEvaluationPage = forwardRef(function SolutionEvaluationPage(props, ref) {
-  const [reason, setReason] = useState('')
-  const [choice, setChoice] = useState(null) // 'yes' | 'no' | null
+  const { answers, setQ2Choice, setQ2Reason } = useAnswers()
 
   const handleChoice = (val) => {
-    setChoice(val)
+    setQ2Choice(val)
   }
 
   const stopFlipPropagation = (e) => {
@@ -58,15 +58,15 @@ const SolutionEvaluationPage = forwardRef(function SolutionEvaluationPage(props,
                 <div className="evaluation-choices">
                   <button
                     type="button"
-                    className={`evaluation-btn ${choice === 'yes' ? 'evaluation-btn-yes' : ''}`}
-                    onClick={() => handleChoice('yes')}
+                    className={`evaluation-btn ${answers.q2.choice === true ? 'evaluation-btn-yes' : ''}`}
+                    onClick={() => handleChoice(true)}
                   >
                     Ya
                   </button>
                   <button
                     type="button"
-                    className={`evaluation-btn ${choice === 'no' ? 'evaluation-btn-no' : ''}`}
-                    onClick={() => handleChoice('no')}
+                    className={`evaluation-btn ${answers.q2.choice === false ? 'evaluation-btn-no' : ''}`}
+                    onClick={() => handleChoice(false)}
                   >
                     Tidak
                   </button>
@@ -75,8 +75,8 @@ const SolutionEvaluationPage = forwardRef(function SolutionEvaluationPage(props,
                   <label>Tuliskan alasanmu di bawah ini</label>
                   <textarea
                     placeholder="Jawaban Anda..."
-                    value={reason}
-                    onChange={(e) => setReason(e.target.value)}
+                    value={answers.q2.reason}
+                    onChange={(e) => setQ2Reason(e.target.value)}
                     onPointerDownCapture={stopFlipPropagation}
                     onMouseDownCapture={stopFlipPropagation}
                     onTouchStartCapture={stopFlipPropagation}

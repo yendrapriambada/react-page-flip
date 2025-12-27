@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useState } from 'react'
+import { useAnswers } from '../../context/AnswersContext'
 
 const DigitalResourceQuestionPage = forwardRef(function DigitalResourceQuestionPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -6,6 +7,7 @@ const DigitalResourceQuestionPage = forwardRef(function DigitalResourceQuestionP
   const fullText =
     '"Mahasiswa diminta mengidentifikasi media digital yang tepat berdasarkan wacana yang telah disajikan sebelumnya."'
   const [displayedText, setDisplayedText] = useState('')
+  const { answers, setQ7Answer } = useAnswers()
 
   const handlePlayClick = () => {
     if (!isPlaying) {
@@ -58,6 +60,8 @@ const DigitalResourceQuestionPage = forwardRef(function DigitalResourceQuestionP
           <div className="evaluation-input-wrapper">
             <textarea
               placeholder="Tulis jawaban dan alasannya di sini..."
+              value={answers.q7.answer}
+              onChange={(e) => setQ7Answer(e.target.value)}
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}

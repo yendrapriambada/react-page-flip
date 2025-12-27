@@ -1,9 +1,8 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
+import { useAnswers } from '../../context/AnswersContext'
 
 const PosterTaskRightPage = forwardRef(function PosterTaskRightPage(props, ref) {
-  const [posterLink, setPosterLink] = useState('')
-  const [needDiscussion, setNeedDiscussion] = useState(null)
-  const [reason, setReason] = useState('')
+  const { answers, setQ9PosterLink, setQ9NeedDiscussion, setQ9Reason } = useAnswers()
 
   const stopFlipPropagation = (e) => {
     e.stopPropagation()
@@ -22,8 +21,8 @@ const PosterTaskRightPage = forwardRef(function PosterTaskRightPage(props, ref) 
             <label>Jawaban Anda</label>
             <textarea
               placeholder="Jawaban Anda..."
-              value={posterLink}
-              onChange={(e) => setPosterLink(e.target.value)}
+              value={answers.q9.posterLink}
+              onChange={(e) => setQ9PosterLink(e.target.value)}
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
@@ -40,31 +39,31 @@ const PosterTaskRightPage = forwardRef(function PosterTaskRightPage(props, ref) 
           <div className="evaluation-choices">
             <button
               type="button"
-              className={`evaluation-btn evaluation-btn-yes ${needDiscussion === true ? 'evaluation-selected' : ''}`}
+              className={`evaluation-btn evaluation-btn-yes ${answers.q9.needDiscussion === true ? 'evaluation-selected' : ''}`}
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
-              onClick={() => setNeedDiscussion(true)}
+              onClick={() => setQ9NeedDiscussion(true)}
             >
-              {needDiscussion === true ? 'Ya (✓)' : 'Ya'}
+              {answers.q9.needDiscussion === true ? 'Ya (✓)' : 'Ya'}
             </button>
             <button
               type="button"
-              className={`evaluation-btn evaluation-btn-no ${needDiscussion === false ? 'evaluation-selected' : ''}`}
+              className={`evaluation-btn evaluation-btn-no ${answers.q9.needDiscussion === false ? 'evaluation-selected' : ''}`}
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
-              onClick={() => setNeedDiscussion(false)}
+              onClick={() => setQ9NeedDiscussion(false)}
             >
-              {needDiscussion === false ? 'Tidak (✓)' : 'Tidak'}
+              {answers.q9.needDiscussion === false ? 'Tidak (✓)' : 'Tidak'}
             </button>
           </div>
           <div className="evaluation-input-wrapper">
             <label>Tulis alasanmu di bawah ini!</label>
             <textarea
               placeholder="Jawaban Anda..."
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}
+              value={answers.q9.reason}
+              onChange={(e) => setQ9Reason(e.target.value)}
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}

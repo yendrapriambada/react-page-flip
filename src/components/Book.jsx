@@ -30,11 +30,16 @@ import DigitalResourceRightPage from './pages/DigitalResourceRightPage'
 import DigitalResourceQuestionPage from './pages/DigitalResourceQuestionPage'
 import PosterAppsLeftPage from './pages/PosterAppsLeftPage'
 import PosterTaskRightPage from './pages/PosterTaskRightPage'
+import AnswerReportPage from './pages/AnswerReportPage'
+import BackCoverPage from './pages/BackCoverPage'
+import { AnswersProvider } from '../context/AnswersContext'
 
 function Book() {
   const bookRef = useRef(null)
   const [story, setStory] = useState('')
   const [inputMode, setInputMode] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [totalPages, setTotalPages] = useState(0)
   const [pageSize, setPageSize] = useState({
     width: 450,
     height: 570,
@@ -73,7 +78,13 @@ function Book() {
 
   const handlePrev = () => {
     if (bookRef.current) {
-      bookRef.current.pageFlip().flipPrev()
+      const pageFlip = bookRef.current.pageFlip()
+      if (pageFlip) {
+        const current = pageFlip.getCurrentPageIndex()
+        if (current > 0) {
+          pageFlip.flipPrev()
+        }
+      }
     }
   }
 
@@ -83,10 +94,6 @@ function Book() {
       if (pageFlip) {
         const current = pageFlip.getCurrentPageIndex()
         const total = pageFlip.getPageCount()
-        // Prevent looping: only flip if not at the last page
-        // Note: page index is 0-based.
-        // For double page view, we might need to be careful, but flipNext handles it usually.
-        // However, if the user experiences looping, explicitly checking is safer.
         if (current < total - 1) {
           pageFlip.flipNext()
         }
@@ -97,6 +104,19 @@ function Book() {
   const handleStoryChange = (event) => {
     setStory(event.target.value)
   }
+
+  useEffect(() => {
+    const updatePageMetrics = () => {
+      const pageFlip = bookRef.current?.pageFlip()
+      if (pageFlip) {
+        setCurrentIndex(pageFlip.getCurrentPageIndex())
+        setTotalPages(pageFlip.getPageCount())
+      }
+    }
+    updatePageMetrics()
+    const id = setInterval(updatePageMetrics, 250)
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <div className="flipbook-layout">
@@ -110,76 +130,68 @@ function Book() {
         </p>
       </header>
 
-      <HTMLFlipBook
-        ref={bookRef}
-        width={pageSize.width}
-        height={pageSize.height}
-        minWidth={280}
-        maxWidth={450}
-        minHeight={380}
-        maxHeight={600}
-        size="stretch"
-        maxShadowOpacity={0.7}
-        flippingTime={400}
-        drawShadow
-        showCover
-        showPageCorners
-        mobileScrollSupport
-        disableFlipByClick={false}
-        swipeDistance={80}
+      <AnswersProvider>
+        <HTMLFlipBook
+          ref={bookRef}
+          width={pageSize.width}
+          height={pageSize.height}
+          minWidth={280}
+          maxWidth={450}
+          minHeight={380}
+          maxHeight={600}
+          size="stretch"
+          maxShadowOpacity={0.7}
+          flippingTime={400}
+          drawShadow
+          showCover
+          showPageCorners
+          mobileScrollSupport
+          disableFlipByClick={false}
+          swipeDistance={80}
         useMouseEvents={true}
         className="flipbook-book"
+        onFlip={() => {
+          const pageFlip = bookRef.current?.pageFlip()
+          if (pageFlip) {
+            setCurrentIndex(pageFlip.getCurrentPageIndex())
+            setTotalPages(pageFlip.getPageCount())
+          }
+        }}
       >
-        <CoverPage />
-        <StudentFieldPage />
-        <TeacherTaskPage />
-        <ContextPage />
-        <BreakingNewsPage />
-        
-        {/* <IntroImagePage /> */}
-        {/* <ExperiencePage story={story} onStoryChange={handleStoryChange} /> */}
-        <AnswerFormPage />
-        <SpeechTextPage />
-        <SolutionEvaluationPage />
-        <ObservationSpeechPage />
-        <GroupDataPage />
-        <GraphAnalysisPage />
-        <VideoGalleryPage />
-        <TechnologyImpactPage />
-        <AnnouncementPage />
-        <ExpertOpinionPage />
-        <ExpertSelectionPage />
-
-        <PresentationTopicPage />
-        <PresentationInstructionLeftPage />
-        <PresentationInstructionRightPage />
-        <MediaIdentificationSpeechPage />
-        <JournalPortraitPage />
-        <DigitalResourceQuestionPage />
-        <DigitalResourceLeftPage />
-        <DigitalResourceRightPage />
-        <PosterAppsLeftPage />
-        <PosterTaskRightPage />
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        {/* <QuestionPage /> */}
-      </HTMLFlipBook>
+          <CoverPage />
+          <StudentFieldPage />
+          <TeacherTaskPage />
+          <ContextPage />
+          <BreakingNewsPage />
+          
+          {/* <IntroImagePage /> */}
+          {/* <ExperiencePage story={story} onStoryChange={handleStoryChange} /> */}
+          <AnswerFormPage />
+          <SpeechTextPage />
+          <SolutionEvaluationPage />
+          <ObservationSpeechPage />
+          <GroupDataPage />
+          <GraphAnalysisPage />
+          <VideoGalleryPage />
+          <TechnologyImpactPage />
+          <AnnouncementPage />
+          <ExpertOpinionPage />
+          <ExpertSelectionPage />
+          
+          <PresentationTopicPage />
+          <PresentationInstructionLeftPage />
+          <PresentationInstructionRightPage />
+          <MediaIdentificationSpeechPage />
+          <JournalPortraitPage />
+          <DigitalResourceQuestionPage />
+          <DigitalResourceLeftPage />
+          <DigitalResourceRightPage />
+          <PosterAppsLeftPage />
+          <PosterTaskRightPage />
+          <AnswerReportPage />
+          <BackCoverPage />
+        </HTMLFlipBook>
+      </AnswersProvider>
 
       <footer className="flipbook-footer">
         <div className="flipbook-nav">
@@ -187,6 +199,7 @@ function Book() {
             type="button"
             className="nav-button nav-button-secondary"
             onClick={handlePrev}
+            disabled={currentIndex <= 0}
           >
             <span className="nav-icon">‹</span>
             <span>Sebelumnya</span>
@@ -195,13 +208,14 @@ function Book() {
             type="button"
             className="nav-button nav-button-primary"
             onClick={handleNext}
+            disabled={currentIndex >= totalPages - 1}
           >
             <span>Selanjutnya</span>
             <span className="nav-icon nav-icon-right">›</span>
           </button>
         </div>
         <p className="flipbook-tip">
-          Tip: Klik atau geser halaman untuk membalik
+          Halaman {currentIndex + 1} dari {totalPages} · Tip: Klik atau geser halaman untuk membalik
         </p>
       </footer>
     </div>

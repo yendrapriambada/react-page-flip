@@ -1,8 +1,8 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
+import { useAnswers } from '../../context/AnswersContext'
 
 const DigitalResourceRightPage = forwardRef(function DigitalResourceRightPage(props, ref) {
-  const [link, setLink] = useState('')
-  const [summary, setSummary] = useState('')
+  const { answers, setQ8Link, setQ8Summary } = useAnswers()
 
   const stopFlipPropagation = (e) => {
     e.stopPropagation()
@@ -20,8 +20,8 @@ const DigitalResourceRightPage = forwardRef(function DigitalResourceRightPage(pr
             type="url"
             className="link-input input-compact"
             placeholder="Tempelkan link di sini"
-            value={link}
-            onChange={(e) => setLink(e.target.value)}
+            value={answers.q8.link}
+            onChange={(e) => setQ8Link(e.target.value)}
             onPointerDownCapture={stopFlipPropagation}
             onMouseDownCapture={stopFlipPropagation}
             onTouchStartCapture={stopFlipPropagation}
@@ -36,8 +36,8 @@ const DigitalResourceRightPage = forwardRef(function DigitalResourceRightPage(pr
           <textarea
             className="analysis-textarea textarea-compact"
             placeholder="Jawaban singkat Anda"
-            value={summary}
-            onChange={(e) => setSummary(e.target.value)}
+            value={answers.q8.summary}
+            onChange={(e) => setQ8Summary(e.target.value)}
             onPointerDownCapture={stopFlipPropagation}
             onMouseDownCapture={stopFlipPropagation}
             onTouchStartCapture={stopFlipPropagation}

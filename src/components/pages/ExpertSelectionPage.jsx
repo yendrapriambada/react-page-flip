@@ -1,8 +1,8 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
+import { useAnswers } from '../../context/AnswersContext'
 
 const ExpertSelectionPage = forwardRef(function ExpertSelectionPage(props, ref) {
-  const [choice, setChoice] = useState('')
-  const [reason, setReason] = useState('')
+  const { answers, setQ5Choice, setQ5Reason } = useAnswers()
 
   const stopFlipPropagation = (e) => {
     e.stopPropagation()
@@ -20,8 +20,8 @@ const ExpertSelectionPage = forwardRef(function ExpertSelectionPage(props, ref) 
             <textarea
               className="tech-impact-input"
               placeholder="Jawaban Anda..."
-              value={choice}
-              onChange={(e) => setChoice(e.target.value)}
+              value={answers.q5.choice}
+              onChange={(e) => setQ5Choice(e.target.value)}
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
@@ -34,8 +34,8 @@ const ExpertSelectionPage = forwardRef(function ExpertSelectionPage(props, ref) 
             <textarea
               className="tech-impact-input"
               placeholder="Jawaban Anda..."
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}
+              value={answers.q5.reason}
+              onChange={(e) => setQ5Reason(e.target.value)}
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}

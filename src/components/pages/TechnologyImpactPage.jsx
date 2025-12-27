@@ -1,8 +1,8 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
+import { useAnswers } from '../../context/AnswersContext'
 
 const TechnologyImpactPage = forwardRef(function TechnologyImpactPage(props, ref) {
-  const [answer1, setAnswer1] = useState('')
-  const [answer2, setAnswer2] = useState('')
+  const { answers, setQ4Tech, setQ4Reason } = useAnswers()
 
   const stopFlipPropagation = (e) => {
     e.stopPropagation()
@@ -20,8 +20,8 @@ const TechnologyImpactPage = forwardRef(function TechnologyImpactPage(props, ref
             <textarea
               className="tech-impact-input"
               placeholder="Jawaban Anda..."
-              value={answer1}
-              onChange={(e) => setAnswer1(e.target.value)}
+              value={answers.q4.tech}
+              onChange={(e) => setQ4Tech(e.target.value)}
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
@@ -36,8 +36,8 @@ const TechnologyImpactPage = forwardRef(function TechnologyImpactPage(props, ref
             <textarea
               className="tech-impact-input"
               placeholder="Jawaban Anda..."
-              value={answer2}
-              onChange={(e) => setAnswer2(e.target.value)}
+              value={answers.q4.reason}
+              onChange={(e) => setQ4Reason(e.target.value)}
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}

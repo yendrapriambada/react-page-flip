@@ -1,7 +1,8 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
+import { useAnswers } from '../../context/AnswersContext'
 
 const GroupDataPage = forwardRef(function GroupDataPage(props, ref) {
-  const [link, setLink] = useState('')
+  const { answers, setQ3Link } = useAnswers()
 
   const stopFlipPropagation = (e) => {
     e.stopPropagation()
@@ -76,8 +77,8 @@ const GroupDataPage = forwardRef(function GroupDataPage(props, ref) {
                 type="text"
                 className="link-input"
                 placeholder="masukkan link hasil kerja...."
-                value={link}
-                onChange={(e) => setLink(e.target.value)}
+                value={answers.q3.link}
+                onChange={(e) => setQ3Link(e.target.value)}
                 onPointerDownCapture={stopFlipPropagation}
                 onMouseDownCapture={stopFlipPropagation}
                 onTouchStartCapture={stopFlipPropagation}

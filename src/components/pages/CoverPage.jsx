@@ -1,8 +1,10 @@
 import { forwardRef, useState } from 'react'
+import { useAnswers } from '../../context/AnswersContext'
 import coverImage from '../../assets/coverimage.png'
 
 const CoverPage = forwardRef(function CoverPage(props, ref) {
   const [quizCode, setQuizCode] = useState('')
+  const { setUserId } = useAnswers()
 
   const stopFlipPropagation = (e) => {
     e.stopPropagation()
@@ -38,7 +40,11 @@ const CoverPage = forwardRef(function CoverPage(props, ref) {
                 className="cover-input"
                 placeholder="input kode kuis"
                 value={quizCode}
-                onChange={(e) => setQuizCode(e.target.value)}
+                onChange={(e) => {
+                  const val = e.target.value
+                  setQuizCode(val)
+                  setUserId(val)
+                }}
                 onPointerDownCapture={stopFlipPropagation}
                 onMouseDownCapture={stopFlipPropagation}
                 onTouchStartCapture={stopFlipPropagation}
@@ -53,4 +59,3 @@ const CoverPage = forwardRef(function CoverPage(props, ref) {
 })
 
 export default CoverPage
-
