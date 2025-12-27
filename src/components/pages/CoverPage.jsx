@@ -1,6 +1,13 @@
-import { forwardRef } from 'react'
+import { forwardRef, useState } from 'react'
+import coverImage from '../../assets/coverimage.png'
 
 const CoverPage = forwardRef(function CoverPage(props, ref) {
+  const [quizCode, setQuizCode] = useState('')
+
+  const stopFlipPropagation = (e) => {
+    e.stopPropagation()
+  }
+
   return (
     <div className="page page-cover" ref={ref} data-density="hard">
       <div className="page-cover-content">
@@ -19,11 +26,24 @@ const CoverPage = forwardRef(function CoverPage(props, ref) {
             <div className="cover-image-wrapper">
               <div className="cover-image-frame">
                 <img
-                  src="https://images.pexels.com/photos/1000052/pexels-photo-1000052.jpeg"
+                  src={coverImage}
                   alt="Petani memeriksa lahan irigasi yang ramah lingkungan"
                   className="cover-image"
                 />
               </div>
+            </div>
+            <div className="cover-input-wrapper">
+              <input
+                type="text"
+                className="cover-input"
+                placeholder="input kode kuis"
+                value={quizCode}
+                onChange={(e) => setQuizCode(e.target.value)}
+                onPointerDownCapture={stopFlipPropagation}
+                onMouseDownCapture={stopFlipPropagation}
+                onTouchStartCapture={stopFlipPropagation}
+                autoComplete="off"
+              />
             </div>
           </div>
         </div>

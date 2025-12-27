@@ -13,10 +13,23 @@ import GroupDataPage from './pages/GroupDataPage'
 import GraphAnalysisPage from './pages/GraphAnalysisPage'
 import VideoGalleryPage from './pages/VideoGalleryPage'
 import ExpertOpinionPage from './pages/ExpertOpinionPage'
+import ExpertSelectionPage from './pages/ExpertSelectionPage'
 import IntroImagePage from './pages/IntroImagePage'
 import ExperiencePage from './pages/ExperiencePage'
 import QuestionPage from './pages/QuestionPage'
+import PresentationTopicPage from './pages/PresentationTopicPage'
 import AnswerFormPage from './pages/AnswerFormPage'
+import PresentationInstructionLeftPage from './pages/PresentationInstructionLeftPage'
+import PresentationInstructionRightPage from './pages/PresentationInstructionRightPage'
+import JournalPortraitPage from './pages/JournalPortraitPage'
+  import MediaIdentificationSpeechPage from './pages/MediaIdentificationSpeechPage'
+import BreakingNewsPage from './pages/BreakingNewsPage'
+import DigitalResourcePage from './pages/DigitalResourcePage'
+import DigitalResourceLeftPage from './pages/DigitalResourceLeftPage'
+import DigitalResourceRightPage from './pages/DigitalResourceRightPage'
+import DigitalResourceQuestionPage from './pages/DigitalResourceQuestionPage'
+import PosterAppsLeftPage from './pages/PosterAppsLeftPage'
+import PosterTaskRightPage from './pages/PosterTaskRightPage'
 
 function Book() {
   const bookRef = useRef(null)
@@ -118,23 +131,53 @@ function Book() {
         className="flipbook-book"
       >
         <CoverPage />
-        
         <StudentFieldPage />
         <TeacherTaskPage />
         <ContextPage />
+        <BreakingNewsPage />
         
         {/* <IntroImagePage /> */}
         {/* <ExperiencePage story={story} onStoryChange={handleStoryChange} /> */}
         <AnswerFormPage />
         <SpeechTextPage />
-        <ExpertOpinionPage />
         <SolutionEvaluationPage />
-        <TechnologyImpactPage />
         <ObservationSpeechPage />
         <GroupDataPage />
         <GraphAnalysisPage />
         <VideoGalleryPage />
+        <TechnologyImpactPage />
         <AnnouncementPage />
+        <ExpertOpinionPage />
+        <ExpertSelectionPage />
+
+        <PresentationTopicPage />
+        <PresentationInstructionLeftPage />
+        <PresentationInstructionRightPage />
+        <MediaIdentificationSpeechPage />
+        <JournalPortraitPage />
+        <DigitalResourceQuestionPage />
+        <DigitalResourceLeftPage />
+        <DigitalResourceRightPage />
+        <PosterAppsLeftPage />
+        <PosterTaskRightPage />
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         {/* <QuestionPage /> */}
       </HTMLFlipBook>
 

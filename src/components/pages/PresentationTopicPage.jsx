@@ -1,10 +1,10 @@
 import { forwardRef, useEffect, useState } from 'react'
 
-const SpeechTextPage = forwardRef(function SpeechTextPage(props, ref) {
+const PresentationTopicPage = forwardRef(function PresentationTopicPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const fullText =
-    '"Mahasiswa diminta untuk menyajikan solusi yang bisa dilakukan terkait permasalahan yang telah disajikan."'
+    '"Mahasiswa diminta untuk membuat sebuah presentasi multimedia dengan topik: \"Desain Irigasi Hemat Energi: Solusi untuk Daerah dengan Keterbatasan Sumber Daya\"."'
   const [displayedText, setDisplayedText] = useState('')
 
   const handlePlayClick = () => {
@@ -76,4 +76,4 @@ const SpeechTextPage = forwardRef(function SpeechTextPage(props, ref) {
   )
 })
 
-export default SpeechTextPage
+export default PresentationTopicPage

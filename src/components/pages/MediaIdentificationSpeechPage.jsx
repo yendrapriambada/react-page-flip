@@ -1,10 +1,10 @@
 import { forwardRef, useEffect, useState } from 'react'
 
-const SpeechTextPage = forwardRef(function SpeechTextPage(props, ref) {
+const MediaIdentificationSpeechPage = forwardRef(function MediaIdentificationSpeechPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const fullText =
-    '"Mahasiswa diminta untuk menyajikan solusi yang bisa dilakukan terkait permasalahan yang telah disajikan."'
+    '"Mahasiswa diminta mengidentifikasi media digital yang tepat (artikel, video, tutorial, e-book, aplikasi, dll.) terkait teknologi sistem irigasi pertanian."'
   const [displayedText, setDisplayedText] = useState('')
 
   const handlePlayClick = () => {
@@ -70,10 +70,9 @@ const SpeechTextPage = forwardRef(function SpeechTextPage(props, ref) {
           <span className="indicator-dot" />
           <span className="indicator-dot" />
         </div>
-        <div className="page-number page-number-right">— 1 —</div>
       </div>
     </div>
   )
 })
 
-export default SpeechTextPage
+export default MediaIdentificationSpeechPage

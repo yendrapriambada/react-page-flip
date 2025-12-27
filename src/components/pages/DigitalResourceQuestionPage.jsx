@@ -1,10 +1,10 @@
 import { forwardRef, useEffect, useState } from 'react'
 
-const SpeechTextPage = forwardRef(function SpeechTextPage(props, ref) {
+const DigitalResourceQuestionPage = forwardRef(function DigitalResourceQuestionPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const fullText =
-    '"Mahasiswa diminta untuk menyajikan solusi yang bisa dilakukan terkait permasalahan yang telah disajikan."'
+    '"Mahasiswa diminta mengidentifikasi media digital yang tepat berdasarkan wacana yang telah disajikan sebelumnya."'
   const [displayedText, setDisplayedText] = useState('')
 
   const handlePlayClick = () => {
@@ -17,7 +17,6 @@ const SpeechTextPage = forwardRef(function SpeechTextPage(props, ref) {
 
   useEffect(() => {
     if (!isPlaying) return
-
     let index = 0
     const intervalId = setInterval(() => {
       index += 1
@@ -28,14 +27,17 @@ const SpeechTextPage = forwardRef(function SpeechTextPage(props, ref) {
         setIsCompleted(true)
       }
     }, 35)
-
     return () => clearInterval(intervalId)
   }, [isPlaying, fullText])
 
+  const stopFlipPropagation = (e) => {
+    e.stopPropagation()
+  }
+
   return (
     <div className="page" ref={ref}>
-      <div className="page-content page-hero-right">
-        <div className="speech-bubble">
+      <div className="page-content answer-form-page">
+        <div className="speech-bubble answer-speech">
           <p>{displayedText || 'Klik ▶ Play untuk memutar teks'}</p>
         </div>
         {!isCompleted && (
@@ -49,31 +51,24 @@ const SpeechTextPage = forwardRef(function SpeechTextPage(props, ref) {
           </button>
         )}
 
-        <div className="character-section">
-          <div className="avatar-ring">
-            <div className="avatar-ring-inner">
-              <img
-                src="https://images.pexels.com/photos/8617727/pexels-photo-8617727.jpeg"
-                alt="Karakter Dosen"
-                className="character-avatar"
-              />
-            </div>
-          </div>
-          <div className="character-info">
-            <h3 className="character-name">Bapak Hamka</h3>
-            <p className="character-role">Dosen</p>
+        <div className="evaluation-question-card">
+          <h3 className="evaluation-question">
+            Berdasarkan wacana tersebut, sumber daya digital manakah yang tepat untuk membantu petani memahami, menerapkan, dan memanfaatkan teknologi irigasi modern dengan lebih efektif? Berikan alasannya!
+          </h3>
+          <div className="evaluation-input-wrapper">
+            <textarea
+              placeholder="Tulis jawaban dan alasannya di sini..."
+              onPointerDownCapture={stopFlipPropagation}
+              onMouseDownCapture={stopFlipPropagation}
+              onTouchStartCapture={stopFlipPropagation}
+            />
           </div>
         </div>
 
-        <div className="page-indicator page-indicator-right">
-          <span className="indicator-dot indicator-dot-active" />
-          <span className="indicator-dot" />
-          <span className="indicator-dot" />
-        </div>
-        <div className="page-number page-number-right">— 1 —</div>
+        <div className="page-number">— 1 —</div>
       </div>
     </div>
   )
 })
 
-export default SpeechTextPage
+export default DigitalResourceQuestionPage

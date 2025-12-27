@@ -1,20 +1,27 @@
 import React, { forwardRef } from 'react';
-
-// URL Placeholder sementara karena file lokal belum ada di folder assets.
-// Setelah Anda menyimpan gambar Anda sebagai 'src/assets/announcement.jpg',
-// silakan uncomment baris import di bawah ini dan gunakan variabel 'announcementImg'.
-
-// import announcementImg from '../../assets/announcement.jpg'; 
-const placeholderImg = "https://images.pexels.com/photos/2292919/pexels-photo-2292919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"; // Gambar kertas/pengumuman dari Pexels
+import announcementImg from '../../assets/important_announcement.png';
 
 const AnnouncementPage = forwardRef((props, ref) => {
   return (
     <div className="page" ref={ref}>
-      <div className="page-content" style={{ padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f0f0f0' }}>
-        <div style={{ width: '100%', height: '100%', padding: '20px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="page-content" style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          padding: '30px', 
+          paddingBottom: '30px', // Memberikan space ekstra yang cukup di bawah
+          height: '100%',
+          boxSizing: 'border-box' 
+      }}>
+        <div style={{ 
+            flex: 1,
+            width: '100%', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            overflow: 'hidden'
+        }}>
             <img 
-                // Ganti placeholderImg dengan announcementImg setelah file tersedia
-                src={placeholderImg} 
+                src={announcementImg} 
                 alt="Pengumuman Penting" 
                 style={{ 
                     maxWidth: '100%', 
@@ -24,7 +31,7 @@ const AnnouncementPage = forwardRef((props, ref) => {
                 }}
             />
         </div>
-        <div className="page-number">— Pengumuman —</div>
+        <div className="page-number" style={{ textAlign: 'center', flexShrink: 0 }}>— Pengumuman —</div>
       </div>
     </div>
   );

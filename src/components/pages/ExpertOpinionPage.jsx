@@ -3,6 +3,7 @@ import React, { forwardRef, useState, useEffect } from 'react';
 const ExpertOpinionPage = forwardRef((props, ref) => {
   const [playingIndex, setPlayingIndex] = useState(null);
   const [displayedText, setDisplayedText] = useState('');
+  const [revealed, setRevealed] = useState([]);
 
   const experts = [
     {
@@ -49,6 +50,9 @@ const ExpertOpinionPage = forwardRef((props, ref) => {
       setDisplayedText(fullText.slice(0, index));
       if (index >= fullText.length) {
         clearInterval(intervalId);
+        setRevealed((prev) =>
+          prev.includes(playingIndex) ? prev : [...prev, playingIndex]
+        );
       }
     }, 45); // Kecepatan animasi (45ms)
 
@@ -72,6 +76,9 @@ const ExpertOpinionPage = forwardRef((props, ref) => {
       
       utterance.onend = () => {
         setPlayingIndex(null);
+        setRevealed((prev) =>
+          prev.includes(index) ? prev : [...prev, index]
+        );
       };
 
       utterance.onerror = () => {
@@ -85,44 +92,53 @@ const ExpertOpinionPage = forwardRef((props, ref) => {
     }
   };
 
+  const handlePlayClick = (e, expert, index) => {
+    e.stopPropagation();
+    e.preventDefault();
+    handlePlay(expert.quote, index);
+  };
+
   return (
     <div className="page" ref={ref}>
       <div className="page-content expert-opinion-page">
-        <div className="student-board">
-          <div className="student-board-inner">
-            {/* Header / Intro Text */}
-            <div className="expert-intro-box">
-              <p>
-                Setelah membaca teks pemberitahuan tersebut, seorang mahasiswa Prodi Pendidikan IPA berusaha membantu mencarikan solusi dari permasalahan yang ada pada pemberitahuan tersebut. Beberapa rencana solusi yang mungkin dilakukan setelah membaca beberapa artikel dari empat orang pakar di bidangnya sebagai berikut:
-              </p>
-            </div>
+        {/* Header / Intro Text */}
+        <div className="expert-intro-box">
+          <p>
+            Setelah membaca teks pemberitahuan tersebut, seorang mahasiswa Prodi Pendidikan IPA berusaha membantu mencarikan solusi dari permasalahan yang ada pada pemberitahuan tersebut. Beberapa rencana solusi yang mungkin dilakukan setelah membaca beberapa artikel dari empat orang pakar di bidangnya sebagai berikut:
+          </p>
+        </div>
 
-            {/* Expert Cards List */}
-            <div className="expert-list">
-              {experts.map((expert, index) => (
-                <div key={index} className="expert-card">
-                  <div className="expert-img-wrapper">
-                    <img src={expert.img} alt={expert.name} className="expert-img" />
-                  </div>
-                  <div className="expert-content">
-                    <h3 className="expert-name">
-                      {expert.name}, <span className="expert-title">{expert.title}</span>
-                    </h3>
-                    <p className="expert-quote">
-                      "{playingIndex === index ? displayedText : expert.quote}"
-                    </p>
-                  </div>
-                  <button 
-                    className={`expert-play-btn ${playingIndex === index ? 'playing' : ''}`}
-                    onClick={() => handlePlay(expert.quote, index)}
-                    title={playingIndex === index ? "Stop" : "Dengarkan"}
-                  >
-                    {playingIndex === index ? "⏹" : "▶"}
-                  </button>
-                </div>
-              ))}
+        {/* Expert Cards List */}
+        <div className="expert-list">
+          {experts.map((expert, index) => (
+            <div key={index} className="expert-card">
+              <div className="expert-img-wrapper">
+                <img src={expert.img} alt={expert.name} className="expert-img" />
+              </div>
+              <div className="expert-content">
+                <h3 className="expert-name">
+                  {expert.name}, <span className="expert-title">{expert.title}</span>
+                </h3>
+                <p className="expert-quote">
+                  {revealed.includes(index)
+                    ? `"${expert.quote}"`
+                    : playingIndex === index
+                    ? `"${displayedText}"`
+                    : <span className="expert-placeholder">Klik tombol play untuk mendengarkan pendapat ahli ▶</span>}
+                </p>
+              </div>
+              <button 
+                className={`expert-play-btn ${playingIndex === index ? 'playing' : ''}`}
+                onClick={(e) => handlePlayClick(e, expert, index)}
+                onMouseDown={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
+                disabled={playingIndex !== null && playingIndex !== index}
+                title={playingIndex === index ? "Stop" : "Dengarkan"}
+              >
+                {playingIndex === index ? "⏹" : "▶"}
+              </button>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

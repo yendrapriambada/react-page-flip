@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useState } from 'react'
+import studentImage from '../../assets/mahasiswapenelitian.png'
 
 const StudentFieldPage = forwardRef(function StudentFieldPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -58,7 +59,7 @@ const StudentFieldPage = forwardRef(function StudentFieldPage(props, ref) {
             <div className="student-board-body">
               <div className="student-image-wrapper">
                 <img
-                  src="https://images.pexels.com/photos/3189418/pexels-photo-3189418.jpeg"
+                  src={studentImage}
                   alt="Mahasiswa belajar bersama di area persawahan"
                   className="student-image"
                 />

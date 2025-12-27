@@ -53,8 +53,8 @@ const ContextPage = forwardRef(function ContextPage(props, ref) {
           <div className="avatar-ring">
             <div className="avatar-ring-inner">
               <img
-                src="https://images.pexels.com/photos/3760852/pexels-photo-3760852.jpeg"
-                alt="Karakter Sarah"
+                src="https://images.pexels.com/photos/8617727/pexels-photo-8617727.jpeg"
+                alt="Karakter Dosen"
                 className="character-avatar"
               />
             </div>
