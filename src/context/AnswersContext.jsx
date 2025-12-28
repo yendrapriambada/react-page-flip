@@ -85,14 +85,14 @@ export function AnswersProvider({ children }) {
       getReportLines() {
         const toLabel = (val) =>
           val === null ? '' : val === true ? 'Ya' : val === false ? 'Tidak' : ''
-        const line1 = answers.q1.map((s) => s && s.trim()).filter(Boolean).join(', ')
-        const line2 = [toLabel(answers.q2.choice), answers.q2.reason].filter(Boolean).join(', ')
+        const line1 = answers.q1.map((s) => s && s.trim()).filter(Boolean).join(' || ')
+        const line2 = [toLabel(answers.q2.choice), answers.q2.reason].filter(Boolean).join(' || ')
         const line3 = [answers.q3.link, answers.q3.analysis, answers.q3.peerReview]
           .map((s) => s && s.trim())
           .filter(Boolean)
-          .join(', ')
-        const line4 = [answers.q4.tech, answers.q4.reason].map((s) => s && s.trim()).filter(Boolean).join(', ')
-        const line5 = [answers.q5.choice, answers.q5.reason].map((s) => s && s.trim()).filter(Boolean).join(', ')
+          .join(' || ')
+        const line4 = [answers.q4.tech, answers.q4.reason].map((s) => s && s.trim()).filter(Boolean).join(' || ')
+        const line5 = [answers.q5.choice, answers.q5.reason].map((s) => s && s.trim()).filter(Boolean).join(' || ')
         const line6 = [
           toLabel(answers.q6.willDelegate),
           answers.q6.reason,
@@ -100,9 +100,9 @@ export function AnswersProvider({ children }) {
         ]
           .map((s) => s && s.trim())
           .filter(Boolean)
-          .join(', ')
-        const line7 = [answers.q7.answer].map((s) => s && s.trim()).filter(Boolean).join(', ')
-        const line8 = [answers.q8.link, answers.q8.summary].map((s) => s && s.trim()).filter(Boolean).join(', ')
+          .join(' || ')
+        const line7 = [answers.q7.answer].map((s) => s && s.trim()).filter(Boolean).join(' || ')
+        const line8 = [answers.q8.link, answers.q8.summary].map((s) => s && s.trim()).filter(Boolean).join(' || ')
         const line9 = [
           toLabel(answers.q9.needDiscussion),
           answers.q9.posterLink,
@@ -110,7 +110,7 @@ export function AnswersProvider({ children }) {
         ]
           .map((s) => s && s.trim())
           .filter(Boolean)
-          .join(', ')
+          .join(' || ')
         return [line1, line2, line3, line4, line5, line6, line7, line8, line9]
       },
     }
