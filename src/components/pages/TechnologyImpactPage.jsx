@@ -15,7 +15,7 @@ const TechnologyImpactPage = forwardRef(function TechnologyImpactPage(props, ref
           <div className="tech-impact-section">
             <label className="tech-impact-label">
               Menurut pendapatmu, teknologi manakah yang memberikan dampak positif terhadap
-              penghematan air dan pengurangan pemborosan?
+              penghematan air dan pengurangan pemborosan? Mengapa?
             </label>
             <textarea
               className="tech-impact-input"
@@ -25,6 +25,7 @@ const TechnologyImpactPage = forwardRef(function TechnologyImpactPage(props, ref
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
+              required
               autoComplete="off"
             />
           </div>
@@ -41,6 +42,7 @@ const TechnologyImpactPage = forwardRef(function TechnologyImpactPage(props, ref
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
+              required
               autoComplete="off"
             />
           </div>

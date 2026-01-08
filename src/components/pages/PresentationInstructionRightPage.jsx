@@ -13,9 +13,7 @@ const PresentationInstructionRightPage = forwardRef(function PresentationInstruc
       <div className="page-content presentation-instruction-page">
         <div className="evaluation-question-card">
           <h3 className="evaluation-question">
-            Berdasarkan teks tugas di atas, jika Anda berperan sebagai ketua
-            kelompok, apakah Anda akan membagi tugas kepada setiap anggota
-            kelompok dalam menyiapkan presentasi tersebut? Mengapa?
+            Berdasarkan teks tugas di atas, jika Anda berperan sebagai ketua kelompok, Apakah Anda akan membagi tugas berdasarkan topik yang diminta? Jelaskan alasannya.
           </h3>
           <div className="evaluation-choices">
             <button
@@ -54,22 +52,20 @@ const PresentationInstructionRightPage = forwardRef(function PresentationInstruc
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
+              required
+              autoComplete="off"
             />
           </div>
         </div>
 
         <div className="evaluation-question-card">
           <h3 className="evaluation-question">
-            Berdasarkan teks tugas di atas, setelah Anda bekerja dengan kelompok,
-            buat sebuah presentasi multimedia dengan topik "Desain Irigasi Hemat
-            Energi: Solusi untuk Daerah dengan Keterbatasan Sumber Daya" sesuai
-            instruksi presentasi.
+            Berdasarkan teks tugas di atas, Sajikan hasil analisis dan desain tersebut dalam bentuk presentasi multimedia sesuai instruksi.
           </h3>
           <p className="page-body-text page-body-muted">
-            (Silahkan gunakan aplikasi membuat presentasi yang ketahui)
+            (Silahkan gunakan aplikasi membuat presentasi yang diketahui)
           </p>
           <div className="evaluation-input-wrapper">
-            <label>Tuliskan link hasil kerja di sini</label>
             <textarea
               placeholder="Tuliskan link hasil kerja di sini"
               value={answers.q6.workLink}
@@ -77,6 +73,8 @@ const PresentationInstructionRightPage = forwardRef(function PresentationInstruc
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
+              required
+              autoComplete="off"
             />
           </div>
         </div>

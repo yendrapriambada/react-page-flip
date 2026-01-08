@@ -25,6 +25,7 @@ const DigitalResourceRightPage = forwardRef(function DigitalResourceRightPage(pr
             onPointerDownCapture={stopFlipPropagation}
             onMouseDownCapture={stopFlipPropagation}
             onTouchStartCapture={stopFlipPropagation}
+            required
             autoComplete="off"
           />
         </div>
@@ -41,6 +42,7 @@ const DigitalResourceRightPage = forwardRef(function DigitalResourceRightPage(pr
             onPointerDownCapture={stopFlipPropagation}
             onMouseDownCapture={stopFlipPropagation}
             onTouchStartCapture={stopFlipPropagation}
+            required
             autoComplete="off"
           />
         </div>

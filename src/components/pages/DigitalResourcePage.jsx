@@ -1,4 +1,5 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef, useState, useEffect } from 'react'
+import { speakIndonesianMale, cancelSpeech } from '../../utils/tts'
 
 const SITES = [
   {
@@ -55,6 +56,13 @@ const DigitalResourcePage = forwardRef(function DigitalResourcePage(props, ref) 
   const stopFlipPropagation = (e) => {
     e.stopPropagation()
   }
+
+  useEffect(() => {
+    const text =
+      'Carilah informasi dari penyedia sumber daya digital di internet tentang teknologi irigasi modern.'
+    speakIndonesianMale(text)
+    return () => cancelSpeech()
+  }, [])
 
   return (
     <div className="page" ref={ref}>
@@ -121,6 +129,7 @@ const DigitalResourcePage = forwardRef(function DigitalResourcePage(props, ref) 
                     onPointerDownCapture={stopFlipPropagation}
                     onMouseDownCapture={stopFlipPropagation}
                     onTouchStartCapture={stopFlipPropagation}
+                    required
                     autoComplete="off"
                   />
                 </div>
@@ -137,6 +146,7 @@ const DigitalResourcePage = forwardRef(function DigitalResourcePage(props, ref) 
                     onPointerDownCapture={stopFlipPropagation}
                     onMouseDownCapture={stopFlipPropagation}
                     onTouchStartCapture={stopFlipPropagation}
+                    required
                     autoComplete="off"
                   />
                 </div>
@@ -152,4 +162,3 @@ const DigitalResourcePage = forwardRef(function DigitalResourcePage(props, ref) 
 DigitalResourcePage.displayName = 'DigitalResourcePage'
 
 export default DigitalResourcePage
-

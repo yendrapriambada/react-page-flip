@@ -32,8 +32,7 @@ const JournalPortraitPage = forwardRef((props, ref) => {
             <p className="journal-lead">
               Dalam beberapa tahun terakhir, para petani di berbagai wilayah di Indonesia
               menghadapi tantangan yang semakin kompleks terkait pengelolaan sumberdaya air
-              untuk irigasi. Media digital menawarkan akses informasi, pelatihan, dan
-              kolaborasi yang dapat meningkatkan efektivitas praktik irigasi modern.
+              untuk irigasi.
             </p>
           </div>
 
@@ -46,14 +45,12 @@ const JournalPortraitPage = forwardRef((props, ref) => {
             <p>
               Teknologi irigasi modern, seperti penggunaan pompa tenaga surya dalam sistem
               irigasi pertanian, menjadi salah satu solusi yang banyak diperbincangkan. Meskipun
-              menjanjikan berbagai keuntungan, teknologi ini juga membawa dampak yang perlu
-              dipertimbangkan secara matang.
+              menjanjikan dengan berbagai keuntungan, juga membawa dampak negatif yang signifikan. Namun, akses terhadap informasi tentang teknologi tersebut masih jarang dilakukan, terutama bagi petani di daerah terpencil.
             </p>
             <p>
               Dalam situasi ini, keberadaan sumberdaya digital menjadi sangat penting. Internet
               menyediakan beragam sumberdaya digital yang dapat membantu petani memahami,
-              menerapkan, dan memanfaatkan teknologi irigasi dengan lebih efektif, misalkan video
-              edukasi, e-book, dan jurnal ilmiah.
+              menerapkan, dan memanfaatkan teknologi irigasi dengan lebih efektif, misalkan youtube, e-book, jurnal ilmiah, dll.
             </p>
             <p>
               Namun, tidak semua informasi di internet memiliki kredibilitas yang tinggi. Oleh

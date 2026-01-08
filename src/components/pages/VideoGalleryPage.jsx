@@ -20,9 +20,9 @@ const VideoGalleryPage = forwardRef(function VideoGalleryPage(props, ref) {
             <div className="video-wrapper">
               <iframe
                 className="video-frame"
-                src="https://www.youtube.com/embed/zHK8wu5BcS4?si=RPghvehLdxAgxUDP" // Replace with actual ID
+                src="https://www.youtube.com/embed/fPdAsZtuw34?si=YPEXPgMGgMZzEoCF"
                 title="Video Irigasi 1"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
                 allowFullScreen
               />
             </div>
@@ -30,9 +30,9 @@ const VideoGalleryPage = forwardRef(function VideoGalleryPage(props, ref) {
             <div className="video-wrapper">
               <iframe
                 className="video-frame"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=placeholder2" // Replace with actual ID
+                src="https://www.youtube.com/embed/I3RUFh1-87k?si=j6N7xQmZKTuroFL9"
                 title="Video Irigasi 2"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
                 allowFullScreen
               />
             </div>

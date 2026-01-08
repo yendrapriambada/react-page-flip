@@ -1,17 +1,34 @@
 import { forwardRef, useEffect, useState } from 'react'
+import { speakIndonesianMale, cancelSpeech } from '../../utils/tts'
 
 const MediaIdentificationSpeechPage = forwardRef(function MediaIdentificationSpeechPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
+  const targetWord = 'Mengidentifikasi'
   const fullText =
-    '"Mahasiswa diminta mengidentifikasi media digital yang tepat (artikel, video, tutorial, e-book, aplikasi, dll.) terkait teknologi sistem irigasi pertanian."'
+    '"Mahasiswa diminta Mengidentifikasi media digital yang tepat (artikel, video, tutorial, e-book, aplikasi, dll.) terkait teknologi sistem irigasi pertanian."'
   const [displayedText, setDisplayedText] = useState('')
+
+  function renderText(text) {
+    const pos = text.indexOf(targetWord)
+    if (pos === -1) return text
+    const before = text.slice(0, pos)
+    const after = text.slice(pos + targetWord.length)
+    return (
+      <>
+        {before}
+        <strong>{targetWord}</strong>
+        {after}
+      </>
+    )
+  }
 
   const handlePlayClick = () => {
     if (!isPlaying) {
       setDisplayedText('')
       setIsCompleted(false)
       setIsPlaying(true)
+      speakIndonesianMale(fullText)
     }
   }
 
@@ -32,11 +49,15 @@ const MediaIdentificationSpeechPage = forwardRef(function MediaIdentificationSpe
     return () => clearInterval(intervalId)
   }, [isPlaying, fullText])
 
+  useEffect(() => {
+    return () => cancelSpeech()
+  }, [])
+
   return (
     <div className="page" ref={ref}>
       <div className="page-content page-hero-right">
         <div className="speech-bubble">
-          <p>{displayedText || 'Klik ▶ Play untuk memutar teks'}</p>
+          <p>{displayedText ? renderText(displayedText) : 'Klik ▶ Play untuk memutar teks'}</p>
         </div>
         {!isCompleted && (
           <button

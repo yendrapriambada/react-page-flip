@@ -82,6 +82,7 @@ const GroupDataPage = forwardRef(function GroupDataPage(props, ref) {
                 onPointerDownCapture={stopFlipPropagation}
                 onMouseDownCapture={stopFlipPropagation}
                 onTouchStartCapture={stopFlipPropagation}
+                required
                 autoComplete="off"
               />
             </div>

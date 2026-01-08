@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useState } from 'react'
+import { speakIndonesianMale, cancelSpeech } from '../../utils/tts'
 
 const SpeechPage = forwardRef(function SpeechPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -12,6 +13,7 @@ const SpeechPage = forwardRef(function SpeechPage(props, ref) {
       setDisplayedText('')
       setIsCompleted(false)
       setIsPlaying(true)
+      speakIndonesianMale(fullText)
     }
   }
 
@@ -31,6 +33,10 @@ const SpeechPage = forwardRef(function SpeechPage(props, ref) {
 
     return () => clearInterval(intervalId)
   }, [isPlaying, fullText])
+
+  useEffect(() => {
+    return () => cancelSpeech()
+  }, [])
 
   return (
     <div className="page" ref={ref}>

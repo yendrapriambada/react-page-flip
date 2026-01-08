@@ -1,17 +1,35 @@
 import { forwardRef, useEffect, useState } from 'react'
+import { speakIndonesianMale, cancelSpeech } from '../../utils/tts'
 
 const PresentationTopicPage = forwardRef(function PresentationTopicPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
+  const targetPhrase =
+    'Desain Irigasi Hemat Energi: Solusi untuk Daerah dengan Keterbatasan Sumber Daya'
   const fullText =
     '"Mahasiswa diminta untuk membuat sebuah presentasi multimedia dengan topik: \"Desain Irigasi Hemat Energi: Solusi untuk Daerah dengan Keterbatasan Sumber Daya\"."'
   const [displayedText, setDisplayedText] = useState('')
+
+  function renderText(text) {
+    const pos = text.indexOf(targetPhrase)
+    if (pos === -1) return text
+    const before = text.slice(0, pos)
+    const after = text.slice(pos + targetPhrase.length)
+    return (
+      <>
+        {before}
+        <strong>{targetPhrase}</strong>
+        {after}
+      </>
+    )
+  }
 
   const handlePlayClick = () => {
     if (!isPlaying) {
       setDisplayedText('')
       setIsCompleted(false)
       setIsPlaying(true)
+      speakIndonesianMale(fullText)
     }
   }
 
@@ -32,11 +50,15 @@ const PresentationTopicPage = forwardRef(function PresentationTopicPage(props, r
     return () => clearInterval(intervalId)
   }, [isPlaying, fullText])
 
+  useEffect(() => {
+    return () => cancelSpeech()
+  }, [])
+
   return (
     <div className="page" ref={ref}>
       <div className="page-content page-hero-right">
         <div className="speech-bubble">
-          <p>{displayedText || 'Klik ▶ Play untuk memutar teks'}</p>
+          <p>{displayedText ? renderText(displayedText) : 'Klik ▶ Play untuk memutar teks'}</p>
         </div>
         {!isCompleted && (
           <button
@@ -70,7 +92,6 @@ const PresentationTopicPage = forwardRef(function PresentationTopicPage(props, r
           <span className="indicator-dot" />
           <span className="indicator-dot" />
         </div>
-        <div className="page-number page-number-right">— 1 —</div>
       </div>
     </div>
   )

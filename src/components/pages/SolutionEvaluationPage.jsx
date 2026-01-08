@@ -1,5 +1,8 @@
 import { forwardRef } from 'react'
 import { useAnswers } from '../../context/AnswersContext'
+import pompahidram from '../../assets/pompahidram.png';
+import pompasubmersible from '../../assets/pompasubmersible.png';
+import pompadiesel from '../../assets/pompadiesel.png';
 
 const SolutionEvaluationPage = forwardRef(function SolutionEvaluationPage(props, ref) {
   const { answers, setQ2Choice, setQ2Reason } = useAnswers()
@@ -26,21 +29,21 @@ const SolutionEvaluationPage = forwardRef(function SolutionEvaluationPage(props,
               <div className="pump-gallery">
                 <div className="pump-card">
                   <img
-                    src="https://images.pexels.com/photos/574068/pexels-photo-574068.jpeg"
+                    src={pompahidram}
                     alt="Pompa Hidram"
                   />
                   <span>Pompa Hidram</span>
                 </div>
                 <div className="pump-card">
                   <img
-                    src="https://images.pexels.com/photos/2820876/pexels-photo-2820876.jpeg"
+                    src={pompasubmersible}
                     alt="Pompa Submersible"
                   />
                   <span>Pompa Submersible</span>
                 </div>
                 <div className="pump-card">
                   <img
-                    src="https://images.pexels.com/photos/4792473/pexels-photo-4792473.jpeg"
+                    src={pompadiesel}
                     alt="Pompa Diesel"
                   />
                   <span>Pompa Diesel</span>
@@ -53,7 +56,7 @@ const SolutionEvaluationPage = forwardRef(function SolutionEvaluationPage(props,
               <div className="evaluation-question-card">
                 <h3 className="evaluation-question">
                   Menurut pendapatmu, apakah ketiga solusi yang dikemukakan mahasiswa
-                  tersebut sudah tepat? Mengapa?
+                  tersebut dapat menyelesaikan persoalan pada wacana di atas? mengapa?
                 </h3>
                 <div className="evaluation-choices">
                   <button
@@ -72,7 +75,7 @@ const SolutionEvaluationPage = forwardRef(function SolutionEvaluationPage(props,
                   </button>
                 </div>
                 <div className="evaluation-input-wrapper">
-                  <label>Tuliskan alasanmu di bawah ini</label>
+                  <label>Tuliskan alasanmu pada kolom di bawah ini</label>
                   <textarea
                     placeholder="Jawaban Anda..."
                     value={answers.q2.reason}
@@ -80,6 +83,7 @@ const SolutionEvaluationPage = forwardRef(function SolutionEvaluationPage(props,
                     onPointerDownCapture={stopFlipPropagation}
                     onMouseDownCapture={stopFlipPropagation}
                     onTouchStartCapture={stopFlipPropagation}
+                    required
                     autoComplete="off"
                   />
                 </div>

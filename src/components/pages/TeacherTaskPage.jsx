@@ -34,22 +34,19 @@ const TeacherTaskPage = forwardRef(function TeacherTaskPage(props, ref) {
                   <li>
                     <span className="teacher-list-number">(1)</span>
                     <span>
-                      Permasalahan: kondisi permasalahan yang ditemukan di
-                      lapangan.
+                      Permasalahan: kondisi permasalahan yang ditemukan.
                     </span>
                   </li>
                   <li>
                     <span className="teacher-list-number">(2)</span>
                     <span>
-                      Solusi: cara menyelesaikan persoalan berdasarkan data
-                      yang dikumpulkan.
+                      Solusi: cara menyelesaikan persoalan.
                     </span>
                   </li>
                   <li>
                     <span className="teacher-list-number">(3)</span>
                     <span>
-                      Konsekuensi: dampak dari solusi yang dikemukakan terhadap
-                      lingkungan dan masyarakat.
+                      Konsekuensi: dampak dari solusi yang dikemukakan.
                     </span>
                   </li>
                 </ul>

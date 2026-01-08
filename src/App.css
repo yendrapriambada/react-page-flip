@@ -4,6 +4,7 @@
   --font-title: "Playfair Display", serif;
   --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
+  --font-size-global: 0.9rem;
   --color-cream: #fdf3e6;
   --color-cream-deep: #f4ddc0;
   --color-burgundy: #7b2030;
@@ -429,6 +430,11 @@ html {
   line-height: 1.55;
   color: #1f2a2a;
   white-space: pre-wrap;
+}
+
+.student-field-page .student-text-inner strong,
+.student-field-page .student-text-inner b {
+  font-weight: 700 !important;
 }
 
 .teacher-text-panel {
@@ -973,8 +979,8 @@ html {
 
 .pump-card img {
   width: 100%;
-  height: 50px;
-  object-fit: cover;
+  height: 120px;
+  object-fit: contain;
   border-radius: 6px;
 }
 
@@ -1076,8 +1082,9 @@ html {
 }
 
 .evaluation-input-wrapper textarea {
-  flex: 1;
   width: 100%;
+  height: 110px;
+  min-height: 90px;
   padding: 12px 14px;
   border: none;
   outline: none;
@@ -1216,7 +1223,7 @@ html {
 .video-gallery-page {
   padding: 16px;
   height: 100%; /* Ensure page content takes full height */
-  overflow: hidden; /* Prevent spillover */
+  overflow: visible; /* Allow iframe fullscreen to work */
 }
 
 .video-gallery-container {
@@ -1243,10 +1250,10 @@ html {
   width: 100%;
   /* Reduce aspect ratio or max-height to fit two videos */
   /* aspect-ratio: 16 / 9;  <-- This might be too tall for two videos stacked */
-  height: 190px; /* Increased height as requested */
+  height: 260px;
   background: #000;
   border-radius: 8px;
-  overflow: hidden;
+  overflow: visible; /* Allow iframe fullscreen to work */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   flex-shrink: 0; /* Prevent videos from squashing weirdly */
 }
@@ -1255,6 +1262,28 @@ html {
   width: 100%;
   height: 100%;
   border: none;
+  position: relative;
+  z-index: 2;
+}
+
+/* Fullscreen safety overrides */
+:fullscreen,
+:-webkit-full-screen {
+  overflow: visible !important;
+}
+
+html:has(:fullscreen),
+body:has(:fullscreen) {
+  overflow: visible !important;
+}
+
+.flipbook-book:has(:fullscreen),
+.page:has(:fullscreen),
+.page-content:has(:fullscreen),
+.video-wrapper:has(:fullscreen) {
+  overflow: visible !important;
+  transform: none !important;
+  backface-visibility: visible !important;
 }
 
 .video-gallery-note {
@@ -1663,6 +1692,42 @@ html {
   color: var(--color-text-main);
 }
 
+.journal-page {
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(20, 43, 103, 0.35) transparent;
+}
+.journal-page::-webkit-scrollbar {
+  width: 4px;
+}
+.journal-page::-webkit-scrollbar-thumb {
+  background: rgba(20, 43, 103, 0.35);
+  border-radius: 4px;
+}
+.journal-page::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.journal-left,
+.journal-right {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(20, 43, 103, 0.3) transparent;
+}
+.journal-left::-webkit-scrollbar,
+.journal-right::-webkit-scrollbar {
+  width: 4px;
+}
+.journal-left::-webkit-scrollbar-thumb,
+.journal-right::-webkit-scrollbar-thumb {
+  background: rgba(20, 43, 103, 0.3);
+  border-radius: 4px;
+}
+.journal-left::-webkit-scrollbar-track,
+.journal-right::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 /* Poster Apps Left Page */
 .poster-left-page {
   display: flex;
@@ -1787,6 +1852,23 @@ html {
 .digital-left,
 .digital-right {
   gap: 10px;
+}
+
+.page-content.digital-left {
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(122, 85, 60, 0.25) transparent;
+}
+.page-content.digital-left::-webkit-scrollbar {
+  width: 4px;
+}
+.page-content.digital-left::-webkit-scrollbar-thumb {
+  background: rgba(122, 85, 60, 0.25);
+  border-radius: 4px;
+}
+.page-content.digital-left::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 /* Answer Report Page */
@@ -2159,4 +2241,23 @@ html {
   .video-wrapper {
     height: 160px;
   }
+}
+
+.page:not(.page-cover) * {
+  font-family: var(--font-body) !important;
+  font-size: var(--font-size-global) !important;
+}
+
+.page * {
+  font-weight: 400 !important;
+}
+
+strong,
+b {
+  font-weight: 400 !important;
+}
+
+/* Override khusus agar teks penting di balon percakapan tampil tebal */
+.page .speech-bubble strong {
+  font-weight: 700 !important;
 }

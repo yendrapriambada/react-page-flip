@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useState } from 'react'
+import { speakIndonesianMale, cancelSpeech } from '../../utils/tts'
 import { useAnswers } from '../../context/AnswersContext'
 
 const DigitalResourceQuestionPage = forwardRef(function DigitalResourceQuestionPage(props, ref) {
@@ -14,6 +15,7 @@ const DigitalResourceQuestionPage = forwardRef(function DigitalResourceQuestionP
       setDisplayedText('')
       setIsCompleted(false)
       setIsPlaying(true)
+      speakIndonesianMale(fullText)
     }
   }
 
@@ -31,6 +33,10 @@ const DigitalResourceQuestionPage = forwardRef(function DigitalResourceQuestionP
     }, 35)
     return () => clearInterval(intervalId)
   }, [isPlaying, fullText])
+
+  useEffect(() => {
+    return () => cancelSpeech()
+  }, [])
 
   const stopFlipPropagation = (e) => {
     e.stopPropagation()
@@ -53,6 +59,22 @@ const DigitalResourceQuestionPage = forwardRef(function DigitalResourceQuestionP
           </button>
         )}
 
+        <div className="character-section">
+          <div className="avatar-ring">
+            <div className="avatar-ring-inner">
+              <img
+                src="https://images.pexels.com/photos/8617727/pexels-photo-8617727.jpeg"
+                alt="Bapak Hamka"
+                className="character-avatar"
+              />
+            </div>
+          </div>
+          <div className="character-info">
+            <h3 className="character-name">Bapak Hamka</h3>
+            <p className="character-role">Dosen</p>
+          </div>
+        </div>
+
         <div className="evaluation-question-card">
           <h3 className="evaluation-question">
             Berdasarkan wacana tersebut, sumber daya digital manakah yang tepat untuk membantu petani memahami, menerapkan, dan memanfaatkan teknologi irigasi modern dengan lebih efektif? Berikan alasannya!
@@ -65,11 +87,11 @@ const DigitalResourceQuestionPage = forwardRef(function DigitalResourceQuestionP
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
+              required
+              autoComplete="off"
             />
           </div>
         </div>
-
-        <div className="page-number">— 1 —</div>
       </div>
     </div>
   )

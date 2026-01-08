@@ -14,8 +14,7 @@ const ExpertSelectionPage = forwardRef(function ExpertSelectionPage(props, ref) 
         <div className="tech-impact-container">
           <div className="tech-impact-section">
             <label className="tech-impact-label">
-              Menurut pendapatmu, manakah pendapat ahli yang paling tepat untuk
-              memecahkan masalah kekurangan air dalam irigasi pertanian.
+              Berdasarkan pengumuman Kepala Desa Mari-mari dan keempat pendapat pakar tersebut, solusi manakah yang paling tepat diterapkan di Desa Mari-mari? Jelaskan alasan Anda dengan mempertimbangkan aspek ketersediaan sumber daya, kebutuhan energi, dampak lingkungan, dan keberlanjutan sistem.
             </label>
             <textarea
               className="tech-impact-input"

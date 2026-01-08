@@ -26,6 +26,8 @@ const PosterTaskRightPage = forwardRef(function PosterTaskRightPage(props, ref) 
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
+              required
+              autoComplete="off"
             />
           </div>
         </div>
@@ -67,6 +69,8 @@ const PosterTaskRightPage = forwardRef(function PosterTaskRightPage(props, ref) 
               onPointerDownCapture={stopFlipPropagation}
               onMouseDownCapture={stopFlipPropagation}
               onTouchStartCapture={stopFlipPropagation}
+              required
+              autoComplete="off"
             />
           </div>
         </div>

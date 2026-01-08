@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useState } from 'react'
+import { speakIndonesianMale, cancelSpeech } from '../../utils/tts'
 
 const ProblemAnswersPage = forwardRef(function ProblemAnswersPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -8,12 +9,16 @@ const ProblemAnswersPage = forwardRef(function ProblemAnswersPage(props, ref) {
   const [displayedText, setDisplayedText] = useState('')
 
   const [answers, setAnswers] = useState(Array(6).fill(''))
+  const stopFlipPropagation = (e) => {
+    e.stopPropagation()
+  }
 
   const handlePlayClick = () => {
     if (!isPlaying) {
       setDisplayedText('')
       setIsCompleted(false)
       setIsPlaying(true)
+      speakIndonesianMale(fullText)
     }
   }
 
@@ -33,6 +38,10 @@ const ProblemAnswersPage = forwardRef(function ProblemAnswersPage(props, ref) {
 
     return () => clearInterval(intervalId)
   }, [isPlaying, fullText])
+
+  useEffect(() => {
+    return () => cancelSpeech()
+  }, [])
 
   const handleAnswerChange = (i) => (e) => {
     const next = [...answers]
@@ -70,6 +79,11 @@ const ProblemAnswersPage = forwardRef(function ProblemAnswersPage(props, ref) {
                 placeholder="Jawaban Anda..."
                 value={value}
                 onChange={handleAnswerChange(i)}
+                onPointerDownCapture={stopFlipPropagation}
+                onMouseDownCapture={stopFlipPropagation}
+                onTouchStartCapture={stopFlipPropagation}
+                required
+                autoComplete="off"
               />
             ))}
           </div>
@@ -87,4 +101,3 @@ const ProblemAnswersPage = forwardRef(function ProblemAnswersPage(props, ref) {
 })
 
 export default ProblemAnswersPage
-

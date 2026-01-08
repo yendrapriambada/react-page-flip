@@ -1,10 +1,11 @@
 import { forwardRef, useEffect, useState } from 'react'
+import { speakIndonesianMale, cancelSpeech } from '../../utils/tts'
 
 const ObservationSpeechPage = forwardRef(function ObservationSpeechPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const fullText =
-    '"Mahasiswa diminta untuk melakukan pengamatan terhadap kemampuan sebuah pompa hidram dalam mengalirkan air ke area lahan pertanian yang lebih tinggi."'
+    '"Mahasiswa diminta untuk mencari informasi terkait kemampuan sebuah pompa hidram dalam mengalirkan air ke area lahan pertanian yang lebih tinggi."'
   const [displayedText, setDisplayedText] = useState('')
 
   const handlePlayClick = () => {
@@ -12,6 +13,7 @@ const ObservationSpeechPage = forwardRef(function ObservationSpeechPage(props, r
       setDisplayedText('')
       setIsCompleted(false)
       setIsPlaying(true)
+      speakIndonesianMale(fullText)
     }
   }
 
@@ -31,6 +33,10 @@ const ObservationSpeechPage = forwardRef(function ObservationSpeechPage(props, r
 
     return () => clearInterval(intervalId)
   }, [isPlaying, fullText])
+
+  useEffect(() => {
+    return () => cancelSpeech()
+  }, [])
 
   return (
     <div className="page" ref={ref}>
@@ -70,7 +76,6 @@ const ObservationSpeechPage = forwardRef(function ObservationSpeechPage(props, r
           <span className="indicator-dot" />
           <span className="indicator-dot" />
         </div>
-        <div className="page-number page-number-right">— 1 —</div>
       </div>
     </div>
   )

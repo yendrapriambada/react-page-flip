@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useState } from 'react'
+import { speakIndonesianMale, cancelSpeech } from '../../utils/tts'
 
 const ContextPage = forwardRef(function ContextPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -12,6 +13,7 @@ const ContextPage = forwardRef(function ContextPage(props, ref) {
       setDisplayedText('')
       setIsCompleted(false)
       setIsPlaying(true)
+      speakIndonesianMale(fullText)
     }
   }
 
@@ -31,6 +33,10 @@ const ContextPage = forwardRef(function ContextPage(props, ref) {
 
     return () => clearInterval(intervalId)
   }, [isPlaying, fullText])
+
+  useEffect(() => {
+    return () => cancelSpeech()
+  }, [])
 
   return (
     <div className="page" ref={ref}>
@@ -70,7 +76,6 @@ const ContextPage = forwardRef(function ContextPage(props, ref) {
           <span className="indicator-dot" />
           <span className="indicator-dot" />
         </div>
-        <div className="page-number page-number-right">— 1 —</div>
       </div>
     </div>
   )

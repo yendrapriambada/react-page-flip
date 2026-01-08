@@ -24,6 +24,7 @@ const GraphAnalysisPage = forwardRef(function GraphAnalysisPage(props, ref) {
                 onPointerDownCapture={stopFlipPropagation}
                 onMouseDownCapture={stopFlipPropagation}
                 onTouchStartCapture={stopFlipPropagation}
+                required
                 autoComplete="off"
               />
             </div>
@@ -42,6 +43,7 @@ const GraphAnalysisPage = forwardRef(function GraphAnalysisPage(props, ref) {
                 onPointerDownCapture={stopFlipPropagation}
                 onMouseDownCapture={stopFlipPropagation}
                 onTouchStartCapture={stopFlipPropagation}
+                required
                 autoComplete="off"
               />
             </div>

@@ -36,13 +36,14 @@ import { AnswersProvider } from '../context/AnswersContext'
 
 function Book() {
   const bookRef = useRef(null)
+  const prevIndexRef = useRef(0)
   const [story, setStory] = useState('')
   const [inputMode, setInputMode] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
   const [pageSize, setPageSize] = useState({
-    width: 450,
-    height: 570,
+    width: 600,
+    height: 760,
   })
 
   useEffect(() => {
@@ -53,11 +54,11 @@ function Book() {
       let width
 
       if (viewportWidth <= 640) {
-        width = Math.max(260, viewportWidth * 0.9)
+        width = Math.max(280, viewportWidth * 0.95)
       } else if (viewportWidth <= 1024) {
-        width = Math.min(Math.max(320, viewportWidth * 0.5), 480)
+        width = Math.min(Math.max(380, viewportWidth * 0.6), 640)
       } else {
-        width = Math.min(Math.max(360, viewportWidth * 0.35), 520)
+        width = Math.min(Math.max(420, viewportWidth * 0.48), 720)
       }
 
       const height = width * aspectRatio
@@ -94,6 +95,26 @@ function Book() {
       if (pageFlip) {
         const current = pageFlip.getCurrentPageIndex()
         const total = pageFlip.getPageCount()
+        const pages = Array.from(document.querySelectorAll('.page'))
+        const currentPageEl = pages[current]
+        let hasEmpty = false
+        if (currentPageEl) {
+          const inputs = currentPageEl.querySelectorAll('input, textarea, select')
+          if (inputs.length > 0) {
+            hasEmpty = Array.from(inputs).some((el) => {
+              const type = (el.getAttribute('type') || '').toLowerCase()
+              if (type === 'checkbox' || type === 'radio') {
+                return false
+              }
+              const val = (el.value || '').trim()
+              return val.length === 0
+            })
+          }
+        }
+        if (hasEmpty) {
+          alert('Lengkapi semua kolom input sebelum lanjut ke halaman berikutnya.')
+          return
+        }
         if (current < total - 1) {
           pageFlip.flipNext()
         }
@@ -120,15 +141,6 @@ function Book() {
 
   return (
     <div className="flipbook-layout">
-      <header className="flipbook-header">
-        <h1 className="flipbook-title">
-          <span>Interactive</span>{' '}
-          <span className="flipbook-title-accent">Flipbook</span>
-        </h1>
-        <p className="flipbook-subtitle">
-          Pengalaman membaca digital yang interaktif dengan berbagai jenis konten
-        </p>
-      </header>
 
       <AnswersProvider>
         <HTMLFlipBook
@@ -136,9 +148,9 @@ function Book() {
           width={pageSize.width}
           height={pageSize.height}
           minWidth={280}
-          maxWidth={450}
+          maxWidth={720}
           minHeight={380}
-          maxHeight={600}
+          maxHeight={910}
           size="stretch"
           maxShadowOpacity={0.7}
           flippingTime={400}
@@ -146,14 +158,45 @@ function Book() {
           showCover
           showPageCorners
           mobileScrollSupport
-          disableFlipByClick={false}
+          disableFlipByClick={true}
           swipeDistance={80}
         useMouseEvents={true}
         className="flipbook-book"
         onFlip={() => {
           const pageFlip = bookRef.current?.pageFlip()
           if (pageFlip) {
-            setCurrentIndex(pageFlip.getCurrentPageIndex())
+            const nextIndex = pageFlip.getCurrentPageIndex()
+            const prevIndex = prevIndexRef.current
+            if (nextIndex > prevIndex) {
+              const pages = Array.from(document.querySelectorAll('.page'))
+              const prevPageEl = pages[prevIndex]
+              let hasEmpty = false
+              if (prevPageEl) {
+                const inputs = prevPageEl.querySelectorAll('input, textarea, select')
+                if (inputs.length > 0) {
+                  hasEmpty = Array.from(inputs).some((el) => {
+                    const type = (el.getAttribute('type') || '').toLowerCase()
+                    if (type === 'checkbox' || type === 'radio') {
+                      return false
+                    }
+                    const val = (el.value || '').trim()
+                    return val.length === 0
+                  })
+                }
+              }
+              if (hasEmpty) {
+                alert('Lengkapi semua kolom input sebelum lanjut ke halaman berikutnya.')
+                setTimeout(() => {
+                  const pf = bookRef.current?.pageFlip()
+                  if (pf) pf.flipPrev()
+                }, 0)
+              } else {
+                prevIndexRef.current = nextIndex
+              }
+            } else {
+              prevIndexRef.current = nextIndex
+            }
+            setCurrentIndex(nextIndex)
             setTotalPages(pageFlip.getPageCount())
           }
         }}

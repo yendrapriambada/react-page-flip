@@ -1,4 +1,13 @@
+import { useEffect } from 'react'
+import { speakIndonesianMale, cancelSpeech } from '../../utils/tts'
+
 function NarrativePage() {
+  useEffect(() => {
+    const text =
+      'Pada mata kuliah Pendidikan IPA Terpadu mahasiswa diminta untuk mengerjakan tugas dengan tema Teknologi Ramah Lingkungan untuk Irigasi. Setelah disepakati bersama, konteks yang akan dibahas terkait tema tersebut adalah Sistem Irigasi Pertanian. Secara spesifik akan membahas tentang bagaimana kondisi sistem irigasi di lingkungan Kota X dalam mengatasi ketersediaan air yang semakin terbatas.'
+    speakIndonesianMale(text)
+    return () => cancelSpeech()
+  }, [])
   return (
     <div className="page">
       <div className="page-content page-hero-right">
@@ -48,4 +57,3 @@ function NarrativePage() {
 }
 
 export default NarrativePage
-
