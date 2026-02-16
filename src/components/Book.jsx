@@ -96,21 +96,20 @@ function Book() {
         const current = pageFlip.getCurrentPageIndex()
         const total = pageFlip.getPageCount()
         const pages = Array.from(document.querySelectorAll('.page'))
-        const currentPageEl = pages[current]
-        let hasEmpty = false
-        if (currentPageEl) {
-          const inputs = currentPageEl.querySelectorAll('input, textarea, select')
-          if (inputs.length > 0) {
-            hasEmpty = Array.from(inputs).some((el) => {
-              const type = (el.getAttribute('type') || '').toLowerCase()
-              if (type === 'checkbox' || type === 'radio') {
-                return false
-              }
-              const val = (el.value || '').trim()
-              return val.length === 0
-            })
-          }
+        const leftPageEl = pages[current]
+        const rightPageEl = pages[current + 1]
+        const hasEmptyOn = (el) => {
+          if (!el) return false
+          const inputs = el.querySelectorAll('input, textarea, select')
+          if (inputs.length === 0) return false
+          return Array.from(inputs).some((input) => {
+            const type = (input.getAttribute('type') || '').toLowerCase()
+            if (type === 'checkbox' || type === 'radio') return false
+            const val = (input.value || '').trim()
+            return val.length === 0
+          })
         }
+        const hasEmpty = hasEmptyOn(leftPageEl) || hasEmptyOn(rightPageEl)
         if (hasEmpty) {
           alert('Lengkapi semua kolom input sebelum lanjut ke halaman berikutnya.')
           return
@@ -169,21 +168,20 @@ function Book() {
             const prevIndex = prevIndexRef.current
             if (nextIndex > prevIndex) {
               const pages = Array.from(document.querySelectorAll('.page'))
-              const prevPageEl = pages[prevIndex]
-              let hasEmpty = false
-              if (prevPageEl) {
-                const inputs = prevPageEl.querySelectorAll('input, textarea, select')
-                if (inputs.length > 0) {
-                  hasEmpty = Array.from(inputs).some((el) => {
-                    const type = (el.getAttribute('type') || '').toLowerCase()
-                    if (type === 'checkbox' || type === 'radio') {
-                      return false
-                    }
-                    const val = (el.value || '').trim()
-                    return val.length === 0
-                  })
-                }
+              const leftLeaving = pages[prevIndex]
+              const rightLeaving = pages[prevIndex + 1]
+              const hasEmptyOn = (el) => {
+                if (!el) return false
+                const inputs = el.querySelectorAll('input, textarea, select')
+                if (inputs.length === 0) return false
+                return Array.from(inputs).some((input) => {
+                  const type = (input.getAttribute('type') || '').toLowerCase()
+                  if (type === 'checkbox' || type === 'radio') return false
+                  const val = (input.value || '').trim()
+                  return val.length === 0
+                })
               }
+              const hasEmpty = hasEmptyOn(leftLeaving) || hasEmptyOn(rightLeaving)
               if (hasEmpty) {
                 alert('Lengkapi semua kolom input sebelum lanjut ke halaman berikutnya.')
                 setTimeout(() => {
