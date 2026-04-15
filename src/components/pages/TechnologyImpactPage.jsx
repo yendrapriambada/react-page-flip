@@ -18,6 +18,7 @@ const TechnologyImpactPage = forwardRef(function TechnologyImpactPage(props, ref
               penghematan air dan pengurangan pemborosan? Mengapa?
             </label>
             <textarea
+              rows={3}
               className="tech-impact-input"
               placeholder="Jawaban Anda..."
               value={answers.q4.tech}
@@ -35,6 +36,7 @@ const TechnologyImpactPage = forwardRef(function TechnologyImpactPage(props, ref
               Tuliskan alasanmu di bawah ini
             </label>
             <textarea
+              rows={3}
               className="tech-impact-input"
               placeholder="Jawaban Anda..."
               value={answers.q4.reason}

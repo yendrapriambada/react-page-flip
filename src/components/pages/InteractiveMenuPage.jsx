@@ -90,7 +90,7 @@ const InteractiveMenuPage = forwardRef(function InteractiveMenuPage(props, ref) 
               onPointerDown={stopFlipPropagation}
               onMouseDown={stopFlipPropagation}
               onTouchStart={stopFlipPropagation}
-              rows={4}
+              rows={3}
               maxLength={500}
             />
           </div>
@@ -102,4 +102,3 @@ const InteractiveMenuPage = forwardRef(function InteractiveMenuPage(props, ref) 
 })
 
 export default InteractiveMenuPage
-

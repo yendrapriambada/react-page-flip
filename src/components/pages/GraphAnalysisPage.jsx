@@ -17,6 +17,7 @@ const GraphAnalysisPage = forwardRef(function GraphAnalysisPage(props, ref) {
                 Jelaskan informasi apa yang didapatkan dari grafik batang tersebut!
               </label>
               <textarea
+                rows={3}
                 className="analysis-textarea"
                 placeholder="Jawaban Anda...."
                 value={answers.q3.analysis}
@@ -36,6 +37,7 @@ const GraphAnalysisPage = forwardRef(function GraphAnalysisPage(props, ref) {
                 Mengapa?
               </label>
               <textarea
+                rows={3}
                 className="analysis-textarea"
                 placeholder="Jawaban Anda...."
                 value={answers.q3.peerReview}

@@ -73,8 +73,8 @@ const GroupDataPage = forwardRef(function GroupDataPage(props, ref) {
             </p>
 
             <div className="input-group">
-              <input
-                type="text"
+              <textarea
+                rows={3}
                 className="link-input"
                 placeholder="masukkan link hasil kerja...."
                 value={answers.q3.link}

@@ -24,6 +24,7 @@ const ExperiencePage = forwardRef(function ExperiencePage(props, ref) {
 
         <div className="experience-input-wrapper">
           <textarea
+            rows={3}
             className="experience-textarea"
             placeholder="Tuliskan cerita atau pengalamanmu di sini..."
             value={story}
@@ -43,4 +44,3 @@ const ExperiencePage = forwardRef(function ExperiencePage(props, ref) {
 })
 
 export default ExperiencePage
-

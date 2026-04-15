@@ -77,6 +77,7 @@ const SolutionEvaluationPage = forwardRef(function SolutionEvaluationPage(props,
                 <div className="evaluation-input-wrapper">
                   <label>Tuliskan alasanmu pada kolom di bawah ini</label>
                   <textarea
+                    rows={3}
                     placeholder="Jawaban Anda..."
                     value={answers.q2.reason}
                     onChange={(e) => setQ2Reason(e.target.value)}

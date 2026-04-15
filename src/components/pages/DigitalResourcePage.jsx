@@ -120,8 +120,8 @@ const DigitalResourcePage = forwardRef(function DigitalResourcePage(props, ref) 
                     artikel/video/e-book yang berisi informasi atau konten online tentang
                     teknologi irigasi modern.
                   </h3>
-                  <input
-                    type="url"
+                  <textarea
+                    rows={3}
                     className="link-input"
                     placeholder="Ketik link artikel/video/e-book yang anda temukan di sini!"
                     value={link}
@@ -139,6 +139,7 @@ const DigitalResourcePage = forwardRef(function DigitalResourcePage(props, ref) 
                     Jelaskan apa yang dibahas dalam artikel/video/e-book yang anda temukan!
                   </h3>
                   <textarea
+                    rows={3}
                     className="analysis-textarea"
                     placeholder="Jawaban Anda..."
                     value={summary}

@@ -81,6 +81,7 @@ const DigitalResourceQuestionPage = forwardRef(function DigitalResourceQuestionP
           </h3>
           <div className="evaluation-input-wrapper">
             <textarea
+              rows={3}
               placeholder="Tulis jawaban dan alasannya di sini..."
               value={answers.q7.answer}
               onChange={(e) => setQ7Answer(e.target.value)}

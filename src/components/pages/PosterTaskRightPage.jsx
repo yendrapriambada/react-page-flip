@@ -20,6 +20,7 @@ const PosterTaskRightPage = forwardRef(function PosterTaskRightPage(props, ref) 
           <div className="evaluation-input-wrapper">
             <label>Jawaban Anda</label>
             <textarea
+              rows={3}
               placeholder="Jawaban Anda..."
               value={answers.q9.posterLink}
               onChange={(e) => setQ9PosterLink(e.target.value)}
@@ -63,6 +64,7 @@ const PosterTaskRightPage = forwardRef(function PosterTaskRightPage(props, ref) 
           <div className="evaluation-input-wrapper">
             <label>Tulis alasanmu di bawah ini!</label>
             <textarea
+              rows={3}
               placeholder="Jawaban Anda..."
               value={answers.q9.reason}
               onChange={(e) => setQ9Reason(e.target.value)}

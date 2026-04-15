@@ -16,8 +16,8 @@ const DigitalResourceRightPage = forwardRef(function DigitalResourceRightPage(pr
             Berdasarkan pilihan sumber daya digital yang disediakan, temukan 1 artikel/video/e-book
             yang berisi informasi atau konten online tentang teknologi irigasi modern.
           </h3>
-          <input
-            type="url"
+          <textarea
+            rows={3}
             className="link-input input-compact"
             placeholder="Tempelkan link di sini"
             value={answers.q8.link}
@@ -35,6 +35,7 @@ const DigitalResourceRightPage = forwardRef(function DigitalResourceRightPage(pr
             Jelaskan apa yang dibahas dalam artikel/video/e-book yang anda temukan!
           </h3>
           <textarea
+            rows={3}
             className="analysis-textarea textarea-compact"
             placeholder="Jawaban singkat Anda"
             value={answers.q8.summary}

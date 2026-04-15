@@ -84,6 +84,7 @@ const SolutionReviewPage = forwardRef(function SolutionReviewPage(props, ref) {
                   <div className="qa-reason">
                     <label className="qa-label">Tuliskan alasanmu di bawah ini</label>
                     <textarea
+                      rows={3}
                       className="qa-input"
                       placeholder="Jawaban Anda..."
                       value={reason}
@@ -104,4 +105,3 @@ const SolutionReviewPage = forwardRef(function SolutionReviewPage(props, ref) {
 })
 
 export default SolutionReviewPage
-

@@ -95,9 +95,9 @@ function Book() {
       if (pageFlip) {
         const current = pageFlip.getCurrentPageIndex()
         const total = pageFlip.getPageCount()
+        const isPortrait = pageFlip.getOrientation() === 'portrait'
         const pages = Array.from(document.querySelectorAll('.page'))
         const leftPageEl = pages[current]
-        const rightPageEl = pages[current + 1]
         const hasEmptyOn = (el) => {
           if (!el) return false
           const inputs = el.querySelectorAll('input, textarea, select')
@@ -109,7 +109,9 @@ function Book() {
             return val.length === 0
           })
         }
-        const hasEmpty = hasEmptyOn(leftPageEl) || hasEmptyOn(rightPageEl)
+        const hasEmpty = isPortrait
+          ? hasEmptyOn(leftPageEl)
+          : hasEmptyOn(leftPageEl) || hasEmptyOn(pages[current + 1])
         if (hasEmpty) {
           alert('Lengkapi semua kolom input sebelum lanjut ke halaman berikutnya.')
           return
@@ -167,9 +169,9 @@ function Book() {
             const nextIndex = pageFlip.getCurrentPageIndex()
             const prevIndex = prevIndexRef.current
             if (nextIndex > prevIndex) {
+              const isPortrait = pageFlip.getOrientation() === 'portrait'
               const pages = Array.from(document.querySelectorAll('.page'))
               const leftLeaving = pages[prevIndex]
-              const rightLeaving = pages[prevIndex + 1]
               const hasEmptyOn = (el) => {
                 if (!el) return false
                 const inputs = el.querySelectorAll('input, textarea, select')
@@ -181,7 +183,9 @@ function Book() {
                   return val.length === 0
                 })
               }
-              const hasEmpty = hasEmptyOn(leftLeaving) || hasEmptyOn(rightLeaving)
+              const hasEmpty = isPortrait
+                ? hasEmptyOn(leftLeaving)
+                : hasEmptyOn(leftLeaving) || hasEmptyOn(pages[prevIndex + 1])
               if (hasEmpty) {
                 alert('Lengkapi semua kolom input sebelum lanjut ke halaman berikutnya.')
                 setTimeout(() => {

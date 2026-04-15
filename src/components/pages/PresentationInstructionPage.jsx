@@ -103,6 +103,7 @@ const PresentationInstructionPage = forwardRef(function PresentationInstructionP
                     : 'Mengapa tidak membagi tugas?'}
                 </label>
                 <textarea
+                  rows={3}
                   placeholder="Tuliskan alasanmu di sini"
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
@@ -126,6 +127,7 @@ const PresentationInstructionPage = forwardRef(function PresentationInstructionP
               <div className="evaluation-input-wrapper">
                 <label>Tuliskan link hasil kerja di sini</label>
                 <textarea
+                  rows={3}
                   placeholder="Tuliskan link hasil kerja di sini"
                   value={workLink}
                   onChange={(e) => setWorkLink(e.target.value)}

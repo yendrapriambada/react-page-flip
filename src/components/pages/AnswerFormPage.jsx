@@ -90,9 +90,9 @@ const AnswerFormPage = forwardRef(function AnswerFormPage(props, ref) {
           </h3>
           <div className="answers-grid">
             {ctxAnswers.q1.map((val, idx) => (
-              <input
+              <textarea
                 key={idx}
-                type="text"
+                rows={3}
                 className="answer-input"
                 placeholder="Jawaban Anda..."
                 value={val}

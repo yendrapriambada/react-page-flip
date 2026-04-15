@@ -17,6 +17,7 @@ const ExpertSelectionPage = forwardRef(function ExpertSelectionPage(props, ref) 
               Berdasarkan pengumuman Kepala Desa Mari-mari dan keempat pendapat pakar tersebut, solusi manakah yang paling tepat diterapkan di Desa Mari-mari? Jelaskan alasan Anda dengan mempertimbangkan aspek ketersediaan sumber daya, kebutuhan energi, dampak lingkungan, dan keberlanjutan sistem.
             </label>
             <textarea
+              rows={3}
               className="tech-impact-input"
               placeholder="Jawaban Anda..."
               value={answers.q5.choice}
@@ -31,6 +32,7 @@ const ExpertSelectionPage = forwardRef(function ExpertSelectionPage(props, ref) 
           <div className="tech-impact-section">
             <label className="tech-impact-label">Tuliskan alasanmu di bawah ini</label>
             <textarea
+              rows={3}
               className="tech-impact-input"
               placeholder="Jawaban Anda..."
               value={answers.q5.reason}

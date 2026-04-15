@@ -34,6 +34,16 @@ html {
   color: var(--color-text-main);
 }
 
+#root :where(p, span, div, li, label, h1, h2, h3, h4, h5, h6) {
+  text-align: justify !important;
+  text-justify: inter-word;
+}
+
+textarea {
+  overflow-y: auto;
+  resize: none;
+}
+
 #root {
   width: 100%;
   max-width: 1200px;
@@ -736,8 +746,6 @@ html {
 
 .experience-textarea {
   width: 100%;
-  min-height: 150px;
-  resize: none;
   border: none;
   outline: none;
   background: transparent;
@@ -1083,8 +1091,6 @@ html {
 
 .evaluation-input-wrapper textarea {
   width: 100%;
-  height: 110px;
-  min-height: 90px;
   padding: 12px 14px;
   border: none;
   outline: none;
@@ -1092,7 +1098,6 @@ html {
   background: #ffffff;
   box-shadow: inset 0 0 0 1px rgba(243, 201, 105, 0.8),
     0 4px 12px rgba(122, 85, 60, 0.08);
-  resize: none;
   font-family: var(--font-body);
   font-size: 0.9rem;
   line-height: 1.5;
@@ -1197,18 +1202,15 @@ html {
 }
 
 .analysis-textarea {
-  flex: 1;
   width: 100%;
   padding: 10px 12px;
   border-radius: 12px;
   border: none;
-  resize: none;
   font-family: var(--font-body);
   font-size: 0.85rem;
   background: #ffffff;
   box-shadow: inset 0 0 0 1px rgba(243, 201, 105, 0.8),
     0 4px 10px rgba(122, 85, 60, 0.08);
-  min-height: 100px;
   color: var(--color-text-main);
 }
 
@@ -1325,12 +1327,10 @@ body:has(:fullscreen) {
 
 .tech-impact-input {
   width: 100%;
-  min-height: 120px;
   padding: 14px 16px;
   border-radius: 8px;
   border: none;
   outline: none;
-  resize: none;
   font-family: var(--font-body);
   font-size: 0.95rem;
   color: #333;
@@ -1555,7 +1555,6 @@ body:has(:fullscreen) {
 }
 .presentation-instruction-page .evaluation-input-wrapper textarea {
   font-size: 0.8rem;
-  min-height: 96px;
   padding: 10px 12px;
 }
 .presentation-instruction-page .evaluation-question-card {
@@ -2093,7 +2092,6 @@ body:has(:fullscreen) {
   padding: 8px 10px;
 }
 .textarea-compact {
-  min-height: 120px;
   font-size: 0.78rem;
   padding: 10px 12px;
 }
@@ -2196,7 +2194,6 @@ body:has(:fullscreen) {
     font-size: 0.8rem;
   }
   .analysis-textarea {
-    min-height: 90px;
   }
   .video-wrapper {
     height: 170px;

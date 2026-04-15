@@ -46,6 +46,7 @@ const PresentationInstructionRightPage = forwardRef(function PresentationInstruc
                 : 'Mengapa tidak membagi tugas?'}
             </label>
             <textarea
+              rows={3}
               placeholder="Tuliskan alasanmu di sini"
               value={answers.q6.reason}
               onChange={(e) => setQ6Reason(e.target.value)}
@@ -67,6 +68,7 @@ const PresentationInstructionRightPage = forwardRef(function PresentationInstruc
           </p>
           <div className="evaluation-input-wrapper">
             <textarea
+              rows={3}
               placeholder="Tuliskan link hasil kerja di sini"
               value={answers.q6.workLink}
               onChange={(e) => setQ6WorkLink(e.target.value)}
