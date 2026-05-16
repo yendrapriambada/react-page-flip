@@ -16,12 +16,21 @@ const PosterAppsLeftPage = forwardRef(function PosterAppsLeftPage(props, ref) {
   return (
     <div className="page" ref={ref}>
       <div className="page-content presentation-instruction-page poster-left-page">
-        <div className="callout-row">
-          <div className="callout-image">
-            <img
-              src="https://images.pexels.com/photos/8617727/pexels-photo-8617727.jpeg"
-              alt="Karakter Dosen"
-            />
+        <div className="hamka-chat-row">
+          <div className="character-section">
+            <div className="avatar-ring">
+              <div className="avatar-ring-inner">
+                <img
+                  src="https://images.pexels.com/photos/8617727/pexels-photo-8617727.jpeg"
+                  alt="Karakter Dosen"
+                  className="character-avatar"
+                />
+              </div>
+            </div>
+            <div className="character-info">
+              <h3 className="character-name">Bapak Hamka</h3>
+              <p className="character-role">Dosen</p>
+            </div>
           </div>
           <div className="speech-bubble">
             <p>
@@ -34,17 +43,17 @@ const PosterAppsLeftPage = forwardRef(function PosterAppsLeftPage(props, ref) {
               )}
             </p>
           </div>
+          {!isCompleted && (
+            <button
+              type="button"
+              className={`student-play-button ${isPlaying ? 'student-play-button-active' : ''}`}
+              onClick={handlePlay}
+              disabled={isPlaying}
+            >
+              {isPlaying ? <i>Listening...</i> : <>▶ <i>Play</i></>}
+            </button>
+          )}
         </div>
-        {!isCompleted && (
-          <button
-            type="button"
-            className={`student-play-button ${isPlaying ? 'student-play-button-active' : ''}`}
-            onClick={handlePlay}
-            disabled={isPlaying}
-          >
-            {isPlaying ? <i>Listening...</i> : <>▶ <i>Play</i></>}
-          </button>
-        )}
 
 
 

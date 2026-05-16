@@ -71,8 +71,7 @@ const SITES = [
 
 const DigitalResourceLeftPage = forwardRef(function DigitalResourceLeftPage(props, ref) {
   const fullText =
-    'Carilah informasi dari penyedia sumber daya digital (artikel, video, e-book) di internet tentang teknologi irigasi modern.\n\n' +
-    'Berikut ini beberapa situs penyedia sumber daya digital yang bisa anda pilih dan gunakan.'
+    'Carilah informasi dari penyedia sumber daya digital (artikel, video, e-book) di internet tentang teknologi irigasi modern.'
   const { displayedText, isPlaying, isCompleted, handlePlay } = useTTSAnimation(fullText)
 
   const stopFlipPropagation = (e) => {
@@ -86,13 +85,23 @@ const DigitalResourceLeftPage = forwardRef(function DigitalResourceLeftPage(prop
   return (
     <div className="page" ref={ref}>
       <div className="page-content digital-left">
-        <div className="left-top">
-          <img
-            className="left-hero"
-            src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg"
-            alt="Ilustrasi mencari informasi sumber daya digital"
-          />
-          <div className="left-callout">
+        <div className="hamka-chat-row">
+          <div className="character-section">
+            <div className="avatar-ring">
+              <div className="avatar-ring-inner">
+                <img
+                  src="https://images.pexels.com/photos/8617727/pexels-photo-8617727.jpeg"
+                  alt="Karakter Dosen"
+                  className="character-avatar"
+                />
+              </div>
+            </div>
+            <div className="character-info">
+              <h3 className="character-name">Bapak Hamka</h3>
+              <p className="character-role">Dosen</p>
+            </div>
+          </div>
+          <div className="speech-bubble">
             <p>
               {displayedText ? (
                 displayedText
@@ -113,21 +122,10 @@ const DigitalResourceLeftPage = forwardRef(function DigitalResourceLeftPage(prop
               {isPlaying ? <i>Listening...</i> : <>▶ <i>Play</i></>}
             </button>
           )}
-          <div className="character-section">
-            <div className="avatar-ring">
-              <div className="avatar-ring-inner">
-                <img
-                  src="https://images.pexels.com/photos/8617727/pexels-photo-8617727.jpeg"
-                  alt="Karakter Dosen"
-                  className="character-avatar"
-                />
-              </div>
-            </div>
-            <div className="character-info">
-              <h3 className="character-name">Bapak Hamka</h3>
-              <p className="character-role">Dosen</p>
-            </div>
-          </div>
+        </div>
+
+        <div className="digital-left-intro">
+          <p>Berikut ini beberapa situs penyedia sumber daya digital yang bisa anda pilih dan gunakan.</p>
         </div>
 
         <div

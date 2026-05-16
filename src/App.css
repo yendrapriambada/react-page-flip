@@ -2217,6 +2217,20 @@ body:has(:fullscreen) {
   line-height: 1.45;
 }
 
+.digital-left-intro {
+  padding: 8px 12px;
+  background: #f9f5ef;
+  border-radius: 10px;
+  border: 1px solid #e8ddd0;
+  margin-top: 4px;
+}
+.digital-left-intro p {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #4a3728;
+  margin: 0;
+}
+
 .resource-layout {
   display: grid;
   grid-template-columns: 48% 1fr;
