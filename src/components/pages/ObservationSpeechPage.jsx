@@ -1,42 +1,10 @@
-import { forwardRef, useEffect, useState } from 'react'
-import { speakIndonesianMale, cancelSpeech } from '../../utils/tts'
+import { forwardRef } from 'react'
+import { useTTSAnimation } from '../../hooks/useTTSAnimation'
 
 const ObservationSpeechPage = forwardRef(function ObservationSpeechPage(props, ref) {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isCompleted, setIsCompleted] = useState(false)
   const fullText =
     '"Mahasiswa diminta untuk mencari informasi terkait kemampuan sebuah pompa hidram dalam mengalirkan air ke area lahan pertanian yang lebih tinggi."'
-  const [displayedText, setDisplayedText] = useState('')
-
-  const handlePlayClick = () => {
-    if (!isPlaying) {
-      setDisplayedText('')
-      setIsCompleted(false)
-      setIsPlaying(true)
-      speakIndonesianMale(fullText)
-    }
-  }
-
-  useEffect(() => {
-    if (!isPlaying) return
-
-    let index = 0
-    const intervalId = setInterval(() => {
-      index += 1
-      setDisplayedText(fullText.slice(0, index))
-      if (index >= fullText.length) {
-        clearInterval(intervalId)
-        setIsPlaying(false)
-        setIsCompleted(true)
-      }
-    }, 35)
-
-    return () => clearInterval(intervalId)
-  }, [isPlaying, fullText])
-
-  useEffect(() => {
-    return () => cancelSpeech()
-  }, [])
+  const { displayedText, isPlaying, isCompleted, handlePlay } = useTTSAnimation(fullText)
 
   return (
     <div className="page" ref={ref}>
@@ -57,7 +25,7 @@ const ObservationSpeechPage = forwardRef(function ObservationSpeechPage(props, r
             <button
               type="button"
               className={`student-play-button ${isPlaying ? 'student-play-button-active' : ''}`}
-              onClick={handlePlayClick}
+              onClick={handlePlay}
               disabled={isPlaying}
             >
               {isPlaying ? <i>Listening...</i> : <>▶ <i>Play</i></>}

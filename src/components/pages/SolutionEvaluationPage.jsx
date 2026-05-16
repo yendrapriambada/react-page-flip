@@ -61,17 +61,23 @@ const SolutionEvaluationPage = forwardRef(function SolutionEvaluationPage(props,
                 <div className="evaluation-choices">
                   <button
                     type="button"
-                    className={`evaluation-btn ${answers.q2.choice === true ? 'evaluation-btn-yes' : ''}`}
+                    className={`evaluation-btn evaluation-btn-yes ${answers.q2.choice === true ? 'evaluation-selected' : ''}`}
+                    onPointerDownCapture={stopFlipPropagation}
+                    onMouseDownCapture={stopFlipPropagation}
+                    onTouchStartCapture={stopFlipPropagation}
                     onClick={() => handleChoice(true)}
                   >
-                    Ya
+                    {answers.q2.choice === true ? 'Ya (✓)' : 'Ya'}
                   </button>
                   <button
                     type="button"
-                    className={`evaluation-btn ${answers.q2.choice === false ? 'evaluation-btn-no' : ''}`}
+                    className={`evaluation-btn evaluation-btn-no ${answers.q2.choice === false ? 'evaluation-selected' : ''}`}
+                    onPointerDownCapture={stopFlipPropagation}
+                    onMouseDownCapture={stopFlipPropagation}
+                    onTouchStartCapture={stopFlipPropagation}
                     onClick={() => handleChoice(false)}
                   >
-                    Tidak
+                    {answers.q2.choice === false ? 'Tidak (✗)' : 'Tidak'}
                   </button>
                 </div>
                 <div className="evaluation-input-wrapper">

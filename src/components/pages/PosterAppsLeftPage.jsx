@@ -1,5 +1,5 @@
-import { forwardRef, useEffect, useState } from 'react'
-import { speakIndonesianMale, cancelSpeech } from '../../utils/tts'
+import { forwardRef } from 'react'
+import { useTTSAnimation } from '../../hooks/useTTSAnimation'
 import canvaLogo from '../../assets/canva.png'
 import publisherLogo from '../../assets/microsoft_publisher.png'
 import piktochartLogo from '../../assets/piktochart.png'
@@ -9,39 +9,9 @@ const PosterAppsLeftPage = forwardRef(function PosterAppsLeftPage(props, ref) {
     e.stopPropagation()
   }
 
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isCompleted, setIsCompleted] = useState(false)
   const fullText =
     'Gunakan informasi digital yang telah ditemukan dan dipilih sebelumnya untuk menjelaskan kepada audiens. Anda dapat memanfaatkan salah satu aplikasi desain poster yang disarankan.'
-  const [displayedText, setDisplayedText] = useState('')
-
-  const handlePlayClick = () => {
-    if (!isPlaying) {
-      setDisplayedText('')
-      setIsCompleted(false)
-      setIsPlaying(true)
-      speakIndonesianMale(fullText)
-    }
-  }
-
-  useEffect(() => {
-    if (!isPlaying) return
-    let index = 0
-    const intervalId = setInterval(() => {
-      index += 1
-      setDisplayedText(fullText.slice(0, index))
-      if (index >= fullText.length) {
-        clearInterval(intervalId)
-        setIsPlaying(false)
-        setIsCompleted(true)
-      }
-    }, 35)
-    return () => clearInterval(intervalId)
-  }, [isPlaying, fullText])
-
-  useEffect(() => {
-    return () => cancelSpeech()
-  }, [])
+  const { displayedText, isPlaying, isCompleted, handlePlay } = useTTSAnimation(fullText)
 
   return (
     <div className="page" ref={ref}>
@@ -69,7 +39,7 @@ const PosterAppsLeftPage = forwardRef(function PosterAppsLeftPage(props, ref) {
           <button
             type="button"
             className={`student-play-button ${isPlaying ? 'student-play-button-active' : ''}`}
-            onClick={handlePlayClick}
+            onClick={handlePlay}
             disabled={isPlaying}
           >
             {isPlaying ? <i>Listening...</i> : <>▶ <i>Play</i></>}

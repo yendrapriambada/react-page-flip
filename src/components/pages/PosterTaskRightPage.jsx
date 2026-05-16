@@ -58,7 +58,7 @@ const PosterTaskRightPage = forwardRef(function PosterTaskRightPage(props, ref) 
               onTouchStartCapture={stopFlipPropagation}
               onClick={() => setQ9NeedDiscussion(false)}
             >
-              {answers.q9.needDiscussion === false ? 'Tidak (✓)' : 'Tidak'}
+              {answers.q9.needDiscussion === false ? 'Tidak (✗)' : 'Tidak'}
             </button>
           </div>
           <div className="evaluation-input-wrapper">

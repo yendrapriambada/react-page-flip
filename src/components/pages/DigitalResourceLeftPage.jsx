@@ -1,10 +1,10 @@
-import { forwardRef, useEffect, useState } from 'react'
+import { forwardRef } from 'react'
+import { useTTSAnimation } from '../../hooks/useTTSAnimation'
 import googlebooksIcon from '../../assets/googlebooks.png'
 import springerIcon from '../../assets/springer.png'
 import sciencedirectIcon from '../../assets/sciencedirect.png'
 import doaj from '../../assets/doaj.jpg'
 import wiley from '../../assets/wiley-online.png'
-import { speakIndonesianMale, cancelSpeech } from '../../utils/tts'
 
 const SITES = [
   {
@@ -70,12 +70,11 @@ const SITES = [
 ]
 
 const DigitalResourceLeftPage = forwardRef(function DigitalResourceLeftPage(props, ref) {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isCompleted, setIsCompleted] = useState(false)
   const fullText =
     'Carilah informasi dari penyedia sumber daya digital (artikel, video, e-book) di internet tentang teknologi irigasi modern.\n\n' +
     'Berikut ini beberapa situs penyedia sumber daya digital yang bisa anda pilih dan gunakan.'
-  const [displayedText, setDisplayedText] = useState('')
+  const { displayedText, isPlaying, isCompleted, handlePlay } = useTTSAnimation(fullText)
+
   const stopFlipPropagation = (e) => {
     e.stopPropagation()
   }
@@ -83,34 +82,6 @@ const DigitalResourceLeftPage = forwardRef(function DigitalResourceLeftPage(prop
     e.preventDefault()
     e.stopPropagation()
   }
-
-  const handlePlayClick = () => {
-    if (!isPlaying) {
-      setDisplayedText('')
-      setIsCompleted(false)
-      setIsPlaying(true)
-      speakIndonesianMale(fullText)
-    }
-  }
-
-  useEffect(() => {
-    if (!isPlaying) return
-    let index = 0
-    const intervalId = setInterval(() => {
-      index += 1
-      setDisplayedText(fullText.slice(0, index))
-      if (index >= fullText.length) {
-        clearInterval(intervalId)
-        setIsPlaying(false)
-        setIsCompleted(true)
-      }
-    }, 30)
-    return () => clearInterval(intervalId)
-  }, [isPlaying, fullText])
-
-  useEffect(() => {
-    return () => cancelSpeech()
-  }, [])
 
   return (
     <div className="page" ref={ref}>
@@ -136,7 +107,7 @@ const DigitalResourceLeftPage = forwardRef(function DigitalResourceLeftPage(prop
             <button
               type="button"
               className={`student-play-button ${isPlaying ? 'student-play-button-active' : ''}`}
-              onClick={handlePlayClick}
+              onClick={handlePlay}
               disabled={isPlaying}
             >
               {isPlaying ? <i>Listening...</i> : <>▶ <i>Play</i></>}

@@ -17,7 +17,14 @@ const VideoGalleryPage = forwardRef(function VideoGalleryPage(props, ref) {
               teknologi yang digunakan pada Sistem Irigasi pertanian.
             </p>
 
-            <div className="video-wrapper">
+            <div
+              className="video-wrapper"
+              onPointerDownCapture={(e) => e.stopPropagation()}
+              onMouseDownCapture={(e) => e.stopPropagation()}
+              onTouchStartCapture={(e) => e.stopPropagation()}
+              onPointerUpCapture={(e) => e.stopPropagation()}
+              onClickCapture={(e) => e.stopPropagation()}
+            >
               <iframe
                 className="video-frame"
                 src="https://www.youtube.com/embed/fPdAsZtuw34?si=YPEXPgMGgMZzEoCF"
@@ -27,7 +34,14 @@ const VideoGalleryPage = forwardRef(function VideoGalleryPage(props, ref) {
               />
             </div>
 
-            <div className="video-wrapper">
+            <div
+              className="video-wrapper"
+              onPointerDownCapture={(e) => e.stopPropagation()}
+              onMouseDownCapture={(e) => e.stopPropagation()}
+              onTouchStartCapture={(e) => e.stopPropagation()}
+              onPointerUpCapture={(e) => e.stopPropagation()}
+              onClickCapture={(e) => e.stopPropagation()}
+            >
               <iframe
                 className="video-frame"
                 src="https://www.youtube.com/embed/I3RUFh1-87k?si=j6N7xQmZKTuroFL9"

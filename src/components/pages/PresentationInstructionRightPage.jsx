@@ -34,7 +34,7 @@ const PresentationInstructionRightPage = forwardRef(function PresentationInstruc
               onTouchStartCapture={stopFlipPropagation}
               onClick={() => setQ6WillDelegate(false)}
             >
-              {answers.q6.willDelegate === false ? 'Tidak (✓)' : 'Tidak'}
+              {answers.q6.willDelegate === false ? 'Tidak (✗)' : 'Tidak'}
             </button>
           </div>
           <div className="evaluation-input-wrapper">
@@ -64,7 +64,7 @@ const PresentationInstructionRightPage = forwardRef(function PresentationInstruc
             Berdasarkan teks tugas di atas, Sajikan hasil analisis dan desain tersebut dalam bentuk presentasi multimedia sesuai instruksi.
           </h3>
           <p className="page-body-text page-body-muted">
-            (Silahkan gunakan aplikasi membuat presentasi yang diketahui)
+            <i>(Silahkan gunakan aplikasi membuat presentasi yang diketahui)</i>
           </p>
           <div className="evaluation-input-wrapper">
             <textarea

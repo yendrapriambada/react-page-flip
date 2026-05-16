@@ -1,16 +1,12 @@
-import { forwardRef, useEffect, useState } from 'react'
-import { speakIndonesianMale, cancelSpeech } from '../../utils/tts'
+import { forwardRef } from 'react'
 import { useAnswers } from '../../context/AnswersContext'
+import { useTTSAnimation } from '../../hooks/useTTSAnimation'
 
 const AnswerFormPage = forwardRef(function AnswerFormPage(props, ref) {
-  const { onInputFocusChange } = props
   const { answers: ctxAnswers, setQ1At } = useAnswers()
-
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isCompleted, setIsCompleted] = useState(false)
   const fullText =
     'Mahasiswa diminta menuliskan hasil identifikasi permasalahan berdasarkan wacana sebelumnya.'
-  const [displayedText, setDisplayedText] = useState('')
+  const { displayedText, isPlaying, isCompleted, handlePlay } = useTTSAnimation(fullText)
 
   const handleChange = (index, value) => {
     setQ1At(index, value)
@@ -20,76 +16,46 @@ const AnswerFormPage = forwardRef(function AnswerFormPage(props, ref) {
     e.stopPropagation()
   }
 
-  const handlePlayClick = () => {
-    if (!isPlaying) {
-      setDisplayedText('')
-      setIsCompleted(false)
-      setIsPlaying(true)
-      speakIndonesianMale(fullText)
-    }
-  }
-
-  useEffect(() => {
-    if (!isPlaying) return
-
-    let index = 0
-    const intervalId = setInterval(() => {
-      index += 1
-      setDisplayedText(fullText.slice(0, index))
-      if (index >= fullText.length) {
-        clearInterval(intervalId)
-        setIsPlaying(false)
-        setIsCompleted(true)
-      }
-    }, 35)
-
-    return () => clearInterval(intervalId)
-  }, [isPlaying, fullText])
-
-  useEffect(() => {
-    return () => cancelSpeech()
-  }, [])
-
   return (
     <div className="page" ref={ref}>
       <div className="page-content answer-form-page">
-        <div className="speech-bubble answer-speech">
-          <p>
-            {displayedText ? (
-              displayedText
-            ) : (
-              <span>
-                Klik ▶ <i>Play</i> untuk memutar teks
-              </span>
-            )}
-          </p>
-        </div>
-
-        {!isCompleted && (
-          <button
-            type="button"
-            className={`student-play-button ${isPlaying ? 'student-play-button-active' : ''}`}
-            onClick={handlePlayClick}
-            disabled={isPlaying}
-          >
-            {isPlaying ? <i>Listening...</i> : <>▶ <i>Play</i></>}
-          </button>
-        )}
-
-        <div className="character-section">
-          <div className="avatar-ring">
-            <div className="avatar-ring-inner">
-              <img
-                src="https://images.pexels.com/photos/8617727/pexels-photo-8617727.jpeg"
-                alt="Bapak Hamka"
-                className="character-avatar"
-              />
+        <div className="hamka-chat-row">
+          <div className="character-section">
+            <div className="avatar-ring">
+              <div className="avatar-ring-inner">
+                <img
+                  src="https://images.pexels.com/photos/8617727/pexels-photo-8617727.jpeg"
+                  alt="Bapak Hamka"
+                  className="character-avatar"
+                />
+              </div>
+            </div>
+            <div className="character-info">
+              <h3 className="character-name">Bapak Hamka</h3>
+              <p className="character-role">Dosen</p>
             </div>
           </div>
-          <div className="character-info">
-            <h3 className="character-name">Bapak Hamka</h3>
-            <p className="character-role">Dosen</p>
+          <div className="speech-bubble answer-speech">
+            <p>
+              {displayedText ? (
+                displayedText
+              ) : (
+                <span>
+                  Klik ▶ <i>Play</i> untuk memutar teks
+                </span>
+              )}
+            </p>
           </div>
+          {!isCompleted && (
+            <button
+              type="button"
+              className={`student-play-button ${isPlaying ? 'student-play-button-active' : ''}`}
+              onClick={handlePlay}
+              disabled={isPlaying}
+            >
+              {isPlaying ? <i>Listening...</i> : <>▶ <i>Play</i></>}
+            </button>
+          )}
         </div>
 
         <div className="answer-form-card">

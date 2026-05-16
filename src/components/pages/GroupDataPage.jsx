@@ -63,13 +63,13 @@ const GroupDataPage = forwardRef(function GroupDataPage(props, ref) {
 
             <div className="question-input-card">
               <p className="group-data-instruction">
-                Berdasarkan data di atas, gambarkan dalam bentuk grafik batang (bar
-                chart) yang menunjukkan hubungan perbandingan volume dan debit air
+                Berdasarkan data di atas, gambarkan dalam bentuk grafik batang (<i>bar
+                chart</i>) yang menunjukkan hubungan perbandingan volume dan debit air
                 perhari dari 2 kelompok tersebut!
               </p>
               <p className="group-data-note">
                 (Silahkan gunakan aplikasi pembuat grafik yang anda biasa gunakan dan
-                ketahui, kemudian unggah (upload) hasil kerja melalui link di bawah
+                ketahui, kemudian unggah (<i>upload</i>) hasil kerja melalui link di bawah
                 ini)
               </p>
 

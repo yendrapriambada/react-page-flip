@@ -33,7 +33,7 @@ const GraphAnalysisPage = forwardRef(function GraphAnalysisPage(props, ref) {
             <div className="question-block">
               <label className="analysis-question">
                 Sebagai anggota kelompok, apakah anda meminta saran atau revisi kepada
-                teman dalam kelompok setelah grafik batang (bar chart) dibuat?
+                teman dalam kelompok setelah grafik batang (<i>bar chart</i>) dibuat?
                 Mengapa?
               </label>
               <textarea

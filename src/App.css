@@ -451,7 +451,6 @@ textarea {
   padding: 14px 14px 12px;
   box-shadow: 0 12px 26px rgba(7, 29, 15, 0.55);
   overflow-y: auto;
-  max-height: 180px;
   margin-bottom: 8px;
   flex: 1;
   min-height: 0;
@@ -672,50 +671,104 @@ textarea {
 .page-hero-right-centered .speech-center-group {
   flex: 1;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "character bubble"
+    "character button";
+  gap: 18px 22px;
+  align-items: start;
+  align-content: center;
   justify-content: center;
-  gap: 16px;
   min-height: 0;
 }
 
 .page-hero-right-centered .speech-bubble {
-  align-self: center;
+  grid-area: bubble;
+  align-self: start;
   width: 100%;
   max-width: 520px;
 }
 
-.page-hero-right-centered .speech-bubble::after {
-  left: 50%;
-  transform: translateX(-50%);
+.page-hero-right-centered .character-section {
+  grid-area: character;
+  margin-top: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  align-self: center;
 }
 
-.page-hero-right-centered .character-section {
+.page-hero-right-centered .student-play-button {
+  grid-area: button;
+  justify-self: start;
+}
+
+/* Reusable side-by-side wrapper: avatar left, bubble right */
+.hamka-chat-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "character bubble"
+    "character button";
+  gap: 14px 20px;
+  align-items: start;
+  width: 100%;
+}
+
+.hamka-chat-row > .speech-bubble {
+  grid-area: bubble;
+}
+
+.hamka-chat-row > .character-section {
+  grid-area: character;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   margin-top: 0;
-  justify-content: center;
+  align-self: start;
+}
+
+.hamka-chat-row > .student-play-button {
+  grid-area: button;
+  justify-self: start;
 }
 
 .speech-bubble {
   align-self: stretch;
-  padding: 18px 18px 20px;
-  border-radius: 18px;
+  padding: 18px 22px 20px;
+  border-radius: 20px;
   background: #fdfcfb;
-  box-shadow: 0 10px 25px rgba(122, 85, 60, 0.15);
-  border: 1px solid rgba(243, 201, 105, 0.6);
+  box-shadow: 0 12px 28px rgba(122, 85, 60, 0.22);
+  border: 2px solid #f3c969;
   position: relative;
+  margin-left: 14px;
 }
 
+/* Chat tail pointing LEFT toward the avatar (filled + border) */
+.speech-bubble::before {
+  content: "";
+  position: absolute;
+  top: 26px;
+  left: -16px;
+  border-width: 11px 16px 11px 0;
+  border-style: solid;
+  border-color: transparent #f3c969 transparent transparent;
+}
 .speech-bubble::after {
   content: "";
   position: absolute;
-  bottom: -18px;
-  left: 32px;
-  border-width: 10px 14px 0 0;
+  top: 28px;
+  left: -12px;
+  border-width: 9px 13px 9px 0;
   border-style: solid;
-  border-color: #fdfcfb transparent transparent transparent;
-  filter: drop-shadow(0 4px 6px rgba(122, 85, 60, 0.18));
+  border-color: transparent #fdfcfb transparent transparent;
+  filter: drop-shadow(-2px 0 3px rgba(122, 85, 60, 0.10));
 }
+
+/* Small "speaker name" cap inside the bubble's top edge */
+.speech-bubble::marker { content: none; }
 
 .speech-bubble p {
   font-size: 0.92rem;
@@ -1172,6 +1225,15 @@ textarea {
   font-size: 0.9rem;
   line-height: 1.5;
   color: var(--color-text-main);
+  flex: 1;
+  min-height: 80px;
+  resize: none;
+}
+
+.question-block .analysis-textarea {
+  flex: 1;
+  min-height: 80px;
+  resize: none;
 }
 
 .evaluation-input-wrapper textarea::placeholder {
@@ -1407,6 +1469,14 @@ body:has(:fullscreen) {
   padding: 12px 14px;
   border: 1px solid rgba(243, 201, 105, 0.6);
   box-shadow: 0 8px 20px rgba(12, 27, 22, 0.18);
+  flex: 1;
+  min-height: 0;
+}
+
+.tech-impact-section .tech-impact-input {
+  flex: 1;
+  min-height: 80px;
+  resize: none;
 }
 
 .tech-impact-label {
@@ -1964,6 +2034,18 @@ body:has(:fullscreen) {
 .digital-left,
 .digital-right {
   gap: 10px;
+}
+
+.digital-right .instruction-card {
+  flex: 1;
+  min-height: 0;
+}
+
+.digital-right .instruction-card .link-input,
+.digital-right .instruction-card .analysis-textarea {
+  flex: 1;
+  min-height: 80px;
+  resize: none;
 }
 
 .page-content.digital-left {

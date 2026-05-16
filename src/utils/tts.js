@@ -103,6 +103,9 @@ export const speakIndonesian = (text, opts = {}) => {
   ensureVoices((voices) => {
     const voice = pickIndonesianVoice(voices, gender)
     if (voice) utter.voice = voice
+    if (opts.onBoundary) utter.onboundary = opts.onBoundary
+    if (opts.onEnd) utter.onend = opts.onEnd
+    if (opts.onError) utter.onerror = opts.onError
     window.speechSynthesis.speak(utter)
   })
   return utter
