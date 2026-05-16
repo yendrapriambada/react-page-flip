@@ -60,7 +60,7 @@ const AnswerFormPage = forwardRef(function AnswerFormPage(props, ref) {
 
         <div className="answer-form-card">
           <h3 className="answer-form-title">
-            Menurut pendapatmu, apa saja permasalahan yang dihadapi di dalam wacana breaking news sebelumnya?
+            Menurut pendapatmu, apa saja permasalahan yang dihadapi di dalam wacana <i>breaking news</i> sebelumnya?
           </h3>
           <div className="answers-grid">
             {ctxAnswers.q1.map((val, idx) => (

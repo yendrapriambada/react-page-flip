@@ -13,13 +13,13 @@ const DigitalResourceRightPage = forwardRef(function DigitalResourceRightPage(pr
       <div className="page-content digital-right">
         <div className="instruction-card instruction-compact">
           <h3 className="instruction-title instruction-compact-title">
-            Berdasarkan pilihan sumber daya digital yang disediakan, temukan 1 artikel/video/e-book
+            Berdasarkan pilihan sumber daya digital yang disediakan, temukan 1 artikel/video/<i>e-book</i>
             yang berisi informasi atau konten online tentang teknologi irigasi modern.
           </h3>
           <textarea
             rows={3}
             className="link-input input-compact"
-            placeholder="Ketik link artikel/video/e-book yang anda temukan di sini!"
+            placeholder="Ketik link artikel/video/<i>e-book</i> yang anda temukan di sini!"
             value={answers.q8.link}
             onChange={(e) => setQ8Link(e.target.value)}
             onPointerDownCapture={stopFlipPropagation}
@@ -32,7 +32,7 @@ const DigitalResourceRightPage = forwardRef(function DigitalResourceRightPage(pr
 
         <div className="instruction-card instruction-compact">
           <h3 className="instruction-title instruction-compact-title">
-            Jelaskan apa yang dibahas dalam artikel/video/e-book yang anda temukan!
+            Jelaskan apa yang dibahas dalam artikel/video/<i>e-book</i> yang anda temukan!
           </h3>
           <textarea
             rows={3}

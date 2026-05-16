@@ -14,7 +14,7 @@ const PresentationInstructionLeftPage = forwardRef(function PresentationInstruct
             <span className="heading-line-accent" />
           </div>
 
-          <h3 className="instruction-subtitle">Intruksi Presentasi</h3>
+          <h3 className="instruction-subtitle">Instruksi Presentasi</h3>
           <ul className="instruction-list">
             <li>
               Anda dan tim Anda diminta untuk membuat presentasi kelompok

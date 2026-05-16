@@ -61,7 +61,7 @@ const PresentationInstructionRightPage = forwardRef(function PresentationInstruc
 
         <div className="evaluation-question-card">
           <h3 className="evaluation-question">
-            Berdasarkan teks tugas di atas, Sajikan hasil analisis dan desain tersebut dalam bentuk presentasi multimedia sesuai instruksi.
+            Berdasarkan teks tugas di atas, Sajikan hasil analisis dan desain tersebut dalam bentuk presentasi <i>multimedia</i> sesuai instruksi.
           </h3>
           <p className="page-body-text page-body-muted">
             <i>(Silahkan gunakan aplikasi membuat presentasi yang diketahui)</i>

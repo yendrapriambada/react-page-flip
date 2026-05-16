@@ -12,11 +12,13 @@ const GroupDataPage = forwardRef(function GroupDataPage(props, ref) {
     <div className="page" ref={ref}>
       <div className="page-content group-data-page">
         <div className="group-data-container">
-          <p className="group-data-intro">
+          <div className="expert-intro-box">
+            <p className="group-data-intro">
               Dua kelompok mempresentasikan data hasil pengamatan. Data pada table di
               bawah ini menunjukkan jumlah air yang dipompa dan air yang terbuang
               selama periode 3 hari yang disajikan oleh masing-masing kelompok.
             </p>
+          </div>
 
             <div className="data-box-pink">
               <div className="group-section">

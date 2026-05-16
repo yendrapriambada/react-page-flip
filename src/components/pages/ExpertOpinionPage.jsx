@@ -108,7 +108,7 @@ const ExpertOpinionPage = forwardRef((props, ref) => {
           {experts.map((expert, index) => (
             <div key={index} className="expert-card">
               <div className="expert-img-wrapper">
-                <img src={expert.img} alt={expert.name} className="expert-img" />
+                <img src={expert.img} alt={expert.title} className="expert-img" />
               </div>
               <div className="expert-content">
                 <h3 className="expert-name">{expert.title}</h3>

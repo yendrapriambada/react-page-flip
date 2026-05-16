@@ -523,6 +523,7 @@ textarea {
   border: none;
   border-radius: 999px;
   padding: 9px 22px;
+  min-height: 44px;
   font-size: 0.9rem;
   font-weight: 600;
   background: #f7d9a3;
@@ -1157,6 +1158,7 @@ textarea {
 
 .evaluation-btn {
   padding: 8px 24px;
+  min-height: 44px;
   border: none;
   background: #ffffff;
   border-radius: 999px;
@@ -1450,14 +1452,30 @@ body:has(:fullscreen) {
 .technology-impact-page {
   background-color: #1b3a2f; /* Deep green */
   border-radius: var(--radius-page); /* Match page radius */
+  display: flex;
+  flex-direction: column;
 }
 
 .tech-impact-container {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   padding-top: 12px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.tech-impact-container::-webkit-scrollbar {
+  width: 4px;
+}
+.tech-impact-container::-webkit-scrollbar-thumb {
+  background: rgba(243, 201, 105, 0.5);
+  border-radius: 4px;
+}
+.tech-impact-container::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .tech-impact-section {
@@ -1639,8 +1657,8 @@ body:has(:fullscreen) {
   z-index: 5;
   background: #f7d9a3;
   border: none;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1732,6 +1750,7 @@ body:has(:fullscreen) {
 .presentation-instruction-page .evaluation-btn {
   font-size: 0.65rem;
   padding: 6px 14px;
+  min-height: 44px;
 }
 .presentation-instruction-page .evaluation-input-wrapper label {
   font-size: 0.65rem;

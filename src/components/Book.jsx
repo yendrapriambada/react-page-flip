@@ -91,7 +91,14 @@ function Book() {
       if (pageFlip) {
         const current = pageFlip.getCurrentPageIndex()
         if (current > 0) {
+          // flipPrev() internally uses hardcoded {x:10, y:1} which is rejected by
+          // disableFlipByClick=true in portrait mode (x=10 falls outside centered page).
+          // Workaround: briefly disable the check, call flipPrev(), then restore.
+          // flipPrev() starts the animation synchronously, so restoring immediately is safe.
+          const settings = pageFlip.getSettings()
+          settings.disableFlipByClick = false
           pageFlip.flipPrev()
+          settings.disableFlipByClick = true
         }
       }
     }
@@ -128,12 +135,22 @@ function Book() {
           if (!el) return false
           const inputs = el.querySelectorAll('input, textarea, select')
           if (inputs.length === 0) return false
-          return Array.from(inputs).some((input) => {
+          const hasEmptyInput = Array.from(inputs).some((input) => {
             const type = (input.getAttribute('type') || '').toLowerCase()
             if (type === 'checkbox' || type === 'radio') return false
             const val = (input.value || '').trim()
             return val.length === 0
           })
+          if (hasEmptyInput) return true
+
+          const buttons = el.querySelectorAll('.evaluation-choices')
+          if (buttons.length > 0) {
+            return Array.from(buttons).some((choiceGroup) => {
+              const selected = choiceGroup.querySelector('.evaluation-selected')
+              return !selected
+            })
+          }
+          return false
         }
         const hasEmpty = isPortrait
           ? hasEmptyOn(leftPageEl)
@@ -223,7 +240,12 @@ function Book() {
                 alert('Lengkapi semua kolom input sebelum lanjut ke halaman berikutnya.')
                 setTimeout(() => {
                   const pf = bookRef.current?.pageFlip()
-                  if (pf) pf.flipPrev()
+                  if (pf) {
+                    const s = pf.getSettings()
+                    s.disableFlipByClick = false
+                    pf.flipPrev()
+                    s.disableFlipByClick = true
+                  }
                 }, 0)
               } else {
                 prevIndexRef.current = nextIndex
@@ -278,6 +300,8 @@ function Book() {
             className="nav-button nav-button-secondary"
             onPointerDownCapture={blockFlipGestureCapture}
             onPointerUp={handlePrevPointerUp}
+            onTouchStart={(e) => { e.stopPropagation(); e.nativeEvent?.stopImmediatePropagation?.() }}
+            onTouchEnd={(e) => { e.stopPropagation(); e.preventDefault(); suppressNextClick(); handlePrev() }}
             onClick={() => {
               if (suppressClickRef.current) return
               handlePrev()
@@ -292,6 +316,8 @@ function Book() {
             className="nav-button nav-button-primary"
             onPointerDownCapture={blockFlipGestureCapture}
             onPointerUp={handleNextPointerUp}
+            onTouchStart={(e) => { e.stopPropagation(); e.nativeEvent?.stopImmediatePropagation?.() }}
+            onTouchEnd={(e) => { e.stopPropagation(); e.preventDefault(); suppressNextClick(); handleNext() }}
             onClick={() => {
               if (suppressClickRef.current) return
               handleNext()

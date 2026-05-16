@@ -2,70 +2,79 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { cancelSpeech, speakIndonesianMale } from '../utils/tts'
 
 /**
- * Hook untuk sinkronisasi TTS dan animasi teks karakter per karakter.
- * - Kecepatan animasi dihitung dari estimasi WPM agar mendekati kecepatan TTS.
- * - onboundary menyinkronkan posisi karakter saat TTS melompat ke kata baru.
- * - onend adalah sinyal selesai yang otoritatif: teks langsung penuh dan state selesai.
- * Dengan begitu TTS dan animasi selalu berakhir bersamaan.
+ * Hook untuk sinkronisasi TTS dan animasi teks.
+ * - Mengandalkan onboundary event dari TTS untuk reveal teks kata per kata.
+ * - Tidak ada interval paralel — animasi sepenuhnya dikontrol oleh TTS engine.
+ * - Fallback ke animasi heuristik jika speechSynthesis tidak tersedia.
+ * - onend adalah sinyal selesai: teks langsung penuh dan state selesai.
  */
 export function useTTSAnimation(fullText) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const [displayedText, setDisplayedText] = useState('')
-  const intervalRef = useRef(null)
-  const charIndexRef = useRef(0)
+  const fallbackIntervalRef = useRef(null)
+
+  const stopAll = useCallback(() => {
+    cancelSpeech()
+    if (fallbackIntervalRef.current) clearInterval(fallbackIntervalRef.current)
+  }, [])
 
   const finish = useCallback(() => {
-    clearInterval(intervalRef.current)
+    stopAll()
     setDisplayedText(fullText)
     setIsPlaying(false)
     setIsCompleted(true)
-  }, [fullText])
+  }, [fullText, stopAll])
 
   const handlePlay = useCallback(() => {
     if (isPlaying) return
-    clearInterval(intervalRef.current)
-    charIndexRef.current = 0
+    stopAll()
     setDisplayedText('')
     setIsCompleted(false)
     setIsPlaying(true)
 
-    // Estimasi durasi dari WPM (170 kata/menit pada rate 0.95)
-    const words = fullText.trim().split(/\s+/).filter(Boolean).length
-    const estimatedMs = (words / (170 * 0.95)) * 60_000
-    const perCharMs = Math.max(15, estimatedMs / fullText.length)
-
-    intervalRef.current = setInterval(() => {
-      charIndexRef.current = Math.min(charIndexRef.current + 1, fullText.length)
-      setDisplayedText(fullText.slice(0, charIndexRef.current))
-      if (charIndexRef.current >= fullText.length) {
-        clearInterval(intervalRef.current)
-        // Jangan panggil finish() di sini — tunggu onEnd dari TTS
-      }
-    }, perCharMs)
+    if (!window.speechSynthesis) {
+      // Fallback: animasi heuristik jika TTS tidak tersedia
+      let index = 0
+      const words = fullText.trim().split(/\s+/).filter(Boolean).length
+      const secs = (words * 60) / (130 * 0.9)
+      const perChar = Math.max(15, Math.min(80, (secs * 1000) / fullText.length))
+      fallbackIntervalRef.current = setInterval(() => {
+        index += 1
+        setDisplayedText(fullText.slice(0, index))
+        if (index >= fullText.length) {
+          clearInterval(fallbackIntervalRef.current)
+          setIsPlaying(false)
+          setIsCompleted(true)
+        }
+      }, perChar)
+      return
+    }
 
     speakIndonesianMale(fullText, {
+      rate: 0.9,
       onBoundary: (e) => {
-        if (e.name !== 'word' || typeof e.charIndex !== 'number') return
-        // Hanya maju, jangan pernah mundur — cegah animasi loncat balik
-        // saat TTS pertama fire boundary di awal kata.
-        const target = e.charIndex + (e.charLength || 0)
-        if (target > charIndexRef.current) {
-          charIndexRef.current = target
-          setDisplayedText(fullText.slice(0, target))
+        if (e.charIndex != null) {
+          const revealUpTo = Math.min(e.charIndex + (e.charLength ?? 1), fullText.length)
+          setDisplayedText(fullText.slice(0, revealUpTo))
         }
       },
       onEnd: finish,
       onError: finish,
     })
-  }, [fullText, isPlaying, finish])
+  }, [fullText, isPlaying, stopAll, finish])
 
   useEffect(() => {
-    return () => {
-      cancelSpeech()
-      clearInterval(intervalRef.current)
-    }
-  }, [])
+    return () => stopAll()
+  }, [stopAll])
+
+  // Reset saat teks berubah
+  useEffect(() => {
+    stopAll()
+    setDisplayedText('')
+    setIsPlaying(false)
+    setIsCompleted(false)
+  }, [fullText]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return { displayedText, isPlaying, isCompleted, handlePlay }
 }

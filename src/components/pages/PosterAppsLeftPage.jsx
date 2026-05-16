@@ -10,7 +10,7 @@ const PosterAppsLeftPage = forwardRef(function PosterAppsLeftPage(props, ref) {
   }
 
   const fullText =
-    'Gunakan informasi digital yang telah ditemukan dan dipilih sebelumnya untuk menjelaskan kepada audiens. Anda dapat memanfaatkan salah satu aplikasi desain poster yang disarankan.'
+    'Gunakan informasi digital yang telah ditemukan dan dipilih sebelumnya untuk menjelaskan kepada audien. Anda dapat memanfaatkan salah satu aplikasi desain poster yang disarankan.'
   const { displayedText, isPlaying, isCompleted, handlePlay } = useTTSAnimation(fullText)
 
   return (
