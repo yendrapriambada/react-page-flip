@@ -9,7 +9,7 @@ const AnswerFormPage = forwardRef(function AnswerFormPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const fullText =
-    'Mahasiswa diminta menuliskan identifikasi permasalahan berdasarkan wacana sebelumnya.'
+    'Mahasiswa diminta menuliskan hasil identifikasi permasalahan berdasarkan wacana sebelumnya.'
   const [displayedText, setDisplayedText] = useState('')
 
   const handleChange = (index, value) => {

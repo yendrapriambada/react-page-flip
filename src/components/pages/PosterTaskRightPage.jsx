@@ -37,7 +37,7 @@ const PosterTaskRightPage = forwardRef(function PosterTaskRightPage(props, ref) 
           <h3 className="evaluation-question">
             Sebagai anggota kelompok, apakah anda memerlukan diskusi bersama
             kelompok dalam memilih informasi yang sesuai untuk menyelesaikan tugas
-            Poster tersebut? mengapa?
+            Poster tersebut? Mengapa?
           </h3>
           <div className="evaluation-choices">
             <button

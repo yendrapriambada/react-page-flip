@@ -5,7 +5,7 @@ const ContextPage = forwardRef(function ContextPage(props, ref) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const fullText =
-    '"Mahasiswa diminta untuk mengeksplorasi dan mencari informasi dari berbagai sumber terkait permasalahan."'
+    '"Untuk mendukung penyelesaian tugas tersebut, mahasiswa diminta mengeksplorasi dan mencari informasi dari berbagai sumber yang relevan dengan permasalahan yang dibahas."'
   const [displayedText, setDisplayedText] = useState('')
 
   const handlePlayClick = () => {

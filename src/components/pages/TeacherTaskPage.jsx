@@ -25,31 +25,14 @@ const TeacherTaskPage = forwardRef(function TeacherTaskPage(props, ref) {
 
               <div className="teacher-text-panel">
                 <p className="teacher-text-intro">
-                  Sebagai seorang Dosen, Bapak Hamka meminta mahasiswanya untuk
-                  menyelesaikan tugas terkait sistem irigasi pertanian Kota X.
-                  Beberapa poin yang akan dibahas di antaranya:
+                  Dalam pelaksanaan tugas tersebut, Bapak Hamka meminta mahasiswa
+                  untuk mengkaji beberapa aspek utama yang berkaitan dengan sistem
+                  irigasi pertanian di Kota X, yaitu{' '}
+                  <strong>permasalahan</strong> yang ditemukan,{' '}
+                  <strong>solusi</strong> yang dapat ditawarkan, serta{' '}
+                  <strong>konsekuensi</strong> atau dampak dari solusi yang
+                  dikemukakan.
                 </p>
-
-                <ul className="teacher-text-list">
-                  <li>
-                    <span className="teacher-list-number">(1)</span>
-                    <span>
-                      Permasalahan: kondisi permasalahan yang ditemukan.
-                    </span>
-                  </li>
-                  <li>
-                    <span className="teacher-list-number">(2)</span>
-                    <span>
-                      Solusi: cara menyelesaikan persoalan.
-                    </span>
-                  </li>
-                  <li>
-                    <span className="teacher-list-number">(3)</span>
-                    <span>
-                      Konsekuensi: dampak dari solusi yang dikemukakan.
-                    </span>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>

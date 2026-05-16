@@ -55,8 +55,8 @@ const SolutionEvaluationPage = forwardRef(function SolutionEvaluationPage(props,
             <div className="evaluation-bottom">
               <div className="evaluation-question-card">
                 <h3 className="evaluation-question">
-                  Menurut pendapatmu, apakah ketiga solusi yang dikemukakan mahasiswa
-                  tersebut dapat menyelesaikan persoalan pada wacana di atas? mengapa?
+                  Menurut pendapatmu, apakah ketiga solusi yang dikemukakan oleh mahasiswa
+                  tersebut dapat menyelesaikan persoalan pada wacana di atas? Mengapa?
                 </h3>
                 <div className="evaluation-choices">
                   <button
