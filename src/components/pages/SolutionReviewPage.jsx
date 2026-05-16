@@ -47,14 +47,14 @@ const SolutionReviewPage = forwardRef(function SolutionReviewPage(props, ref) {
                       src="https://images.pexels.com/photos/2820876/pexels-photo-2820876.jpeg"
                       alt="Pompa Submersible"
                     />
-                    <span>Pompa Submersible</span>
+                    <span>Pompa <i>Submersible</i></span>
                   </div>
                   <div className="solution-card">
                     <img
                       src="https://images.pexels.com/photos/4792473/pexels-photo-4792473.jpeg"
                       alt="Pompa Diesel"
                     />
-                    <span>Pompa Diesel</span>
+                    <span>Pompa <i>Diesel</i></span>
                   </div>
                 </div>
               </div>

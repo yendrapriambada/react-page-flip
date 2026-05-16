@@ -46,7 +46,15 @@ const DigitalResourceQuestionPage = forwardRef(function DigitalResourceQuestionP
     <div className="page" ref={ref}>
       <div className="page-content answer-form-page">
         <div className="speech-bubble answer-speech">
-          <p>{displayedText || 'Klik ▶ Play untuk memutar teks'}</p>
+          <p>
+            {displayedText ? (
+              displayedText
+            ) : (
+              <span>
+                Klik ▶ <i>Play</i> untuk memutar teks
+              </span>
+            )}
+          </p>
         </div>
         {!isCompleted && (
           <button
@@ -55,7 +63,7 @@ const DigitalResourceQuestionPage = forwardRef(function DigitalResourceQuestionP
             onClick={handlePlayClick}
             disabled={isPlaying}
           >
-            {isPlaying ? 'Listening...' : '▶ Play'}
+            {isPlaying ? <i>Listening...</i> : <>▶ <i>Play</i></>}
           </button>
         )}
 

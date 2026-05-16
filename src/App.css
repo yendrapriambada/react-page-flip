@@ -95,6 +95,8 @@ textarea {
 .flipbook-book {
   filter: drop-shadow(0 18px 35px rgba(83, 38, 10, 0.28));
   perspective: 1400px;
+  position: relative;
+  z-index: 1;
 }
 
 .page {
@@ -145,6 +147,12 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 .answer-form-page {
@@ -207,6 +215,12 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 .cover-board {
@@ -283,6 +297,11 @@ textarea {
   max-width: 260px;
 }
 
+#root .cover-title {
+  text-align: center !important;
+  text-justify: auto;
+}
+
 .cover-image-wrapper {
   width: 100%;
   display: flex;
@@ -344,12 +363,14 @@ textarea {
   flex-direction: column;
   justify-content: space-between;
   gap: 14px;
+  overflow: hidden;
 }
 
 .teacher-task-page {
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .student-board {
@@ -371,6 +392,7 @@ textarea {
   height: 100%;
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 
 .student-board-bunting {
@@ -384,6 +406,7 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-height: 0;
 }
 
 .teacher-board-body {
@@ -392,6 +415,7 @@ textarea {
   flex-direction: column;
   gap: 14px;
   align-items: stretch;
+  min-height: 0;
 }
 
 .student-image-wrapper {
@@ -430,6 +454,10 @@ textarea {
   max-height: 180px;
   margin-bottom: 8px;
   flex: 1;
+  min-height: 0;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 .student-text-inner {
@@ -454,6 +482,10 @@ textarea {
   box-shadow: 0 12px 26px rgba(7, 29, 15, 0.55);
   overflow-y: auto;
   flex: 1;
+  min-height: 0;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 .teacher-text-intro {
@@ -631,6 +663,37 @@ textarea {
 
 .page-hero-right {
   justify-content: space-between;
+}
+
+.page-hero-right-centered {
+  justify-content: flex-start;
+}
+
+.page-hero-right-centered .speech-center-group {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 0;
+}
+
+.page-hero-right-centered .speech-bubble {
+  align-self: center;
+  width: 100%;
+  max-width: 520px;
+}
+
+.page-hero-right-centered .speech-bubble::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.page-hero-right-centered .character-section {
+  margin-top: 0;
+  justify-content: center;
 }
 
 .speech-bubble {
@@ -858,6 +921,8 @@ textarea {
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  position: relative;
+  z-index: 10000;
 }
 
 .flipbook-nav {
@@ -867,6 +932,8 @@ textarea {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 16px 30px rgba(120, 63, 17, 0.3);
+  position: relative;
+  z-index: 10001;
 }
 
 .nav-button {
@@ -881,6 +948,9 @@ textarea {
   gap: 8px;
   transition: transform 0.12s ease, box-shadow 0.12s ease,
     background-color 0.12s ease, color 0.12s ease;
+  position: relative;
+  z-index: 10002;
+  touch-action: manipulation;
 }
 
 .nav-button-secondary {
@@ -1170,7 +1240,18 @@ textarea {
 }
 
 .input-group {
-  margin-top: auto;
+  margin-top: 6px;
+}
+
+.question-input-card {
+  background: #fdfcfb;
+  border-radius: 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(243, 201, 105, 0.6);
+  box-shadow: 0 8px 20px rgba(122, 85, 60, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .link-input {
@@ -1190,8 +1271,13 @@ textarea {
 .question-block {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
   flex: 1;
+  background: #fdfcfb;
+  border-radius: 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(243, 201, 105, 0.6);
+  box-shadow: 0 8px 20px rgba(122, 85, 60, 0.12);
 }
 
 .analysis-question {
@@ -1307,22 +1393,27 @@ body:has(:fullscreen) {
 .tech-impact-container {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 14px;
   height: 100%;
-  padding-top: 20px;
+  padding-top: 12px;
 }
 
 .tech-impact-section {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
+  background: #fdfcfb;
+  border-radius: 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(243, 201, 105, 0.6);
+  box-shadow: 0 8px 20px rgba(12, 27, 22, 0.18);
 }
 
 .tech-impact-label {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.5;
-  font-weight: 500;
-  color: #ffffff;
+  font-weight: 600;
+  color: #13452f;
 }
 
 .tech-impact-input {
@@ -1345,6 +1436,28 @@ body:has(:fullscreen) {
 
 .tech-impact-input:focus {
   box-shadow: 0 0 0 3px rgba(243, 201, 105, 0.6);
+}
+
+/* Stronger input outlines for pages 10, 11, 13, 16 */
+.group-data-page .link-input,
+.graph-analysis-page .analysis-textarea,
+.technology-impact-page .tech-impact-input {
+  border: 1.5px solid rgba(243, 201, 105, 0.95);
+  outline: 2px solid transparent;
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8),
+    0 4px 12px rgba(122, 85, 60, 0.1);
+  transition: border-color 0.2s ease, outline-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.group-data-page .link-input:focus,
+.graph-analysis-page .analysis-textarea:focus,
+.technology-impact-page .tech-impact-input:focus {
+  border-color: #f3c969;
+  outline-color: rgba(243, 201, 105, 0.45);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.95),
+    0 0 0 4px rgba(243, 201, 105, 0.18),
+    0 8px 18px rgba(122, 85, 60, 0.16);
 }
 
 /* Expert Opinion Page Styles */
@@ -1893,6 +2006,7 @@ body:has(:fullscreen) {
   flex-direction: column;
   padding: 20px 20px 24px;
   gap: 14px;
+  min-height: 0;
 }
 .report-header {
   width: 100%;
@@ -1906,11 +2020,30 @@ body:has(:fullscreen) {
   flex-direction: column;
   gap: 10px;
   flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 6px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(243, 201, 105, 0.45) transparent;
+}
+.report-list::-webkit-scrollbar {
+  width: 4px;
+}
+.report-list::-webkit-scrollbar-thumb {
+  background: rgba(243, 201, 105, 0.45);
+  border-radius: 6px;
+}
+.report-list::-webkit-scrollbar-track {
+  background: transparent;
 }
 .report-row {
   display: flex;
   gap: 14px;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 .report-index {
   color: #f3c969;
@@ -1919,10 +2052,15 @@ body:has(:fullscreen) {
 }
 .report-text {
   color: #fff;
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .report-footer {
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 .report-save-btn {
   border: none;
@@ -1968,10 +2106,8 @@ body:has(:fullscreen) {
   background: rgba(197, 34, 31, 0.2);
   padding: 2px 6px;
   border-radius: 6px;
-  max-width: 50%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .left-top {
@@ -2109,6 +2245,16 @@ body:has(:fullscreen) {
 @media (max-width: 600px) {
   #root {
     padding: 16px 10px;
+  }
+  .flipbook-layout {
+    padding-bottom: 110px;
+  }
+  .flipbook-footer {
+    position: fixed;
+    left: 50%;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    width: auto;
   }
   .page-content {
     padding: 18px 16px;

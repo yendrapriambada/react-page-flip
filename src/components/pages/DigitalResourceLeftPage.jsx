@@ -1,7 +1,6 @@
 import { forwardRef, useEffect, useState } from 'react'
 import googlebooksIcon from '../../assets/googlebooks.png'
 import springerIcon from '../../assets/springer.png'
-import pubmedIcon from '../../assets/pubmed.jpg'
 import sciencedirectIcon from '../../assets/sciencedirect.png'
 import doaj from '../../assets/doaj.jpg'
 import wiley from '../../assets/wiley-online.png'
@@ -12,11 +11,6 @@ const SITES = [
     name: 'ScienceDirect',
     href: 'https://www.sciencedirect.com/',
     img: sciencedirectIcon,
-  },
-  {
-    name: 'PubMed',
-    href: 'https://pubmed.ncbi.nlm.nih.gov/',
-    img: pubmedIcon,
   },
   {
     name: 'Springer',
@@ -128,7 +122,15 @@ const DigitalResourceLeftPage = forwardRef(function DigitalResourceLeftPage(prop
             alt="Ilustrasi mencari informasi sumber daya digital"
           />
           <div className="left-callout">
-            <p>{displayedText || 'Klik ▶ Play untuk memutar teks'}</p>
+            <p>
+              {displayedText ? (
+                displayedText
+              ) : (
+                <span>
+                  Klik ▶ <i>Play</i> untuk memutar teks
+                </span>
+              )}
+            </p>
           </div>
           {!isCompleted && (
             <button
@@ -137,7 +139,7 @@ const DigitalResourceLeftPage = forwardRef(function DigitalResourceLeftPage(prop
               onClick={handlePlayClick}
               disabled={isPlaying}
             >
-              {isPlaying ? 'Listening...' : '▶ Play'}
+              {isPlaying ? <i>Listening...</i> : <>▶ <i>Play</i></>}
             </button>
           )}
           <div className="character-section">

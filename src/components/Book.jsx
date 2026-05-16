@@ -24,7 +24,6 @@ import PresentationInstructionRightPage from './pages/PresentationInstructionRig
 import JournalPortraitPage from './pages/JournalPortraitPage'
   import MediaIdentificationSpeechPage from './pages/MediaIdentificationSpeechPage'
 import BreakingNewsPage from './pages/BreakingNewsPage'
-import DigitalResourcePage from './pages/DigitalResourcePage'
 import DigitalResourceLeftPage from './pages/DigitalResourceLeftPage'
 import DigitalResourceRightPage from './pages/DigitalResourceRightPage'
 import DigitalResourceQuestionPage from './pages/DigitalResourceQuestionPage'
@@ -37,10 +36,12 @@ import { AnswersProvider } from '../context/AnswersContext'
 function Book() {
   const bookRef = useRef(null)
   const prevIndexRef = useRef(0)
+  const suppressClickRef = useRef(false)
   const [story, setStory] = useState('')
   const [inputMode, setInputMode] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
   const [pageSize, setPageSize] = useState({
     width: 600,
     height: 760,
@@ -49,6 +50,7 @@ function Book() {
   useEffect(() => {
     const updateSize = () => {
       const viewportWidth = window.innerWidth
+      const viewportHeight = window.innerHeight
       const aspectRatio = 570 / 450
 
       let width
@@ -61,8 +63,14 @@ function Book() {
         width = Math.min(Math.max(420, viewportWidth * 0.48), 720)
       }
 
+      const localIsMobile = viewportWidth <= 640
+      const reservedHeight = localIsMobile ? 170 : 150
+      const widthFromHeight = (viewportHeight - reservedHeight) / aspectRatio
+      width = Math.max(280, Math.min(width, widthFromHeight, 720))
+
       const height = width * aspectRatio
 
+      setIsMobile(localIsMobile)
       setPageSize({
         width,
         height,
@@ -87,6 +95,24 @@ function Book() {
         }
       }
     }
+  }
+
+  const blockFlipGestureCapture = (e) => {
+    e.stopPropagation()
+  }
+
+  const suppressNextClick = () => {
+    suppressClickRef.current = true
+    setTimeout(() => {
+      suppressClickRef.current = false
+    }, 0)
+  }
+
+  const handlePrevPointerUp = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    suppressNextClick()
+    handlePrev()
   }
 
   const handleNext = () => {
@@ -121,6 +147,13 @@ function Book() {
         }
       }
     }
+  }
+
+  const handleNextPointerUp = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    suppressNextClick()
+    handleNext()
   }
 
   const handleStoryChange = (event) => {
@@ -158,12 +191,12 @@ function Book() {
           drawShadow
           showCover
           showPageCorners
-          mobileScrollSupport
+          mobileScrollSupport={isMobile}
           disableFlipByClick={true}
-          swipeDistance={80}
-        useMouseEvents={true}
-        className="flipbook-book"
-        onFlip={() => {
+          swipeDistance={isMobile ? 9999 : 80}
+          useMouseEvents={!isMobile}
+          className="flipbook-book"
+          onFlip={() => {
           const pageFlip = bookRef.current?.pageFlip()
           if (pageFlip) {
             const nextIndex = pageFlip.getCurrentPageIndex()
@@ -202,7 +235,7 @@ function Book() {
             setTotalPages(pageFlip.getPageCount())
           }
         }}
-      >
+        >
           <CoverPage />
           <StudentFieldPage />
           <TeacherTaskPage />
@@ -243,7 +276,12 @@ function Book() {
           <button
             type="button"
             className="nav-button nav-button-secondary"
-            onClick={handlePrev}
+            onPointerDownCapture={blockFlipGestureCapture}
+            onPointerUp={handlePrevPointerUp}
+            onClick={() => {
+              if (suppressClickRef.current) return
+              handlePrev()
+            }}
             disabled={currentIndex <= 0}
           >
             <span className="nav-icon">‹</span>
@@ -252,7 +290,12 @@ function Book() {
           <button
             type="button"
             className="nav-button nav-button-primary"
-            onClick={handleNext}
+            onPointerDownCapture={blockFlipGestureCapture}
+            onPointerUp={handleNextPointerUp}
+            onClick={() => {
+              if (suppressClickRef.current) return
+              handleNext()
+            }}
             disabled={currentIndex >= totalPages - 1}
           >
             <span>Selanjutnya</span>

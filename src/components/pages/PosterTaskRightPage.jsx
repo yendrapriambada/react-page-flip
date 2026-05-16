@@ -13,7 +13,7 @@ const PosterTaskRightPage = forwardRef(function PosterTaskRightPage(props, ref) 
       <div className="page-content presentation-instruction-page">
         <div className="evaluation-question-card">
           <h3 className="evaluation-question">
-            Buatlah 1 desain Poster untuk menjelaskan informasi teknologi irigasi
+            Buatlah 1 desain <i>Poster</i> untuk menjelaskan informasi teknologi irigasi
             modern yang diperoleh kepada audiens! Tulis link hasil kerja desain
             yang telah anda buat di bawah ini!
           </h3>
@@ -37,7 +37,7 @@ const PosterTaskRightPage = forwardRef(function PosterTaskRightPage(props, ref) 
           <h3 className="evaluation-question">
             Sebagai anggota kelompok, apakah anda memerlukan diskusi bersama
             kelompok dalam memilih informasi yang sesuai untuk menyelesaikan tugas
-            Poster tersebut? Mengapa?
+            <i>Poster</i> tersebut? Mengapa?
           </h3>
           <div className="evaluation-choices">
             <button
@@ -77,7 +77,7 @@ const PosterTaskRightPage = forwardRef(function PosterTaskRightPage(props, ref) 
           </div>
         </div>
 
-        <div className="page-number page-number-right">— Poster —</div>
+        <div className="page-number page-number-right">— <i>Poster</i> —</div>
       </div>
     </div>
   )

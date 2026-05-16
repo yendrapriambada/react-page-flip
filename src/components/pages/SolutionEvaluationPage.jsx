@@ -39,14 +39,14 @@ const SolutionEvaluationPage = forwardRef(function SolutionEvaluationPage(props,
                     src={pompasubmersible}
                     alt="Pompa Submersible"
                   />
-                  <span>Pompa Submersible</span>
+                  <span>Pompa <i>Submersible</i></span>
                 </div>
                 <div className="pump-card">
                   <img
                     src={pompadiesel}
                     alt="Pompa Diesel"
                   />
-                  <span>Pompa Diesel</span>
+                  <span>Pompa <i>Diesel</i></span>
                 </div>
               </div>
             </div>

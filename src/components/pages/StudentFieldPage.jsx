@@ -197,7 +197,7 @@ const StudentFieldPage = forwardRef(function StudentFieldPage(props, ref) {
             onClick={handlePlayClick}
             disabled={isPlaying}
           >
-            {isPlaying ? 'Listening...' : '▶ Play'}
+            {isPlaying ? <i>Listening...</i> : <>▶ <i>Play</i></>}
           </button>
         )}
       </div>

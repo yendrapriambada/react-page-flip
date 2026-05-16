@@ -235,7 +235,7 @@ const AnswerReportPage = forwardRef(function AnswerReportPage(props, ref) {
       <div className="page-content report-page">
         <div className="report-board">
           <div className="report-board-inner">
-            <div className="report-header">-------- Report --------</div>
+            <div className="report-header">-------- <i>Report</i> --------</div>
             <div className="report-list">
               {lines.map((line, idx) => (
                 <div key={idx} className="report-row">

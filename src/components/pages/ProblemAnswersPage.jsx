@@ -53,7 +53,15 @@ const ProblemAnswersPage = forwardRef(function ProblemAnswersPage(props, ref) {
     <div className="page" ref={ref}>
       <div className="page-content answers-page">
         <div className="speech-bubble">
-          <p>{displayedText || 'Klik ▶ Play untuk memutar teks'}</p>
+          <p>
+            {displayedText ? (
+              displayedText
+            ) : (
+              <span>
+                Klik ▶ <i>Play</i> untuk memutar teks
+              </span>
+            )}
+          </p>
         </div>
         {!isCompleted && (
           <button
@@ -62,7 +70,7 @@ const ProblemAnswersPage = forwardRef(function ProblemAnswersPage(props, ref) {
             onClick={handlePlayClick}
             disabled={isPlaying}
           >
-            {isPlaying ? 'Listening...' : '▶ Play'}
+            {isPlaying ? <i>Listening...</i> : <>▶ <i>Play</i></>}
           </button>
         )}
 

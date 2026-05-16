@@ -5,12 +5,12 @@ const JournalPortraitPage = forwardRef((props, ref) => {
     <div className="page" ref={ref}>
       <div className="page-content journal-page">
         <div className="journal-topbar">
-          <span className="journal-edition">NOV. 2023 | VOL. 8</span>
+          <span className="journal-edition"><i>NOV. 2023 | VOL. 8</i></span>
         </div>
 
         <div className="journal-header">
-          <h1 className="journal-title">JOURNAL SCIENCE EDUCATION</h1>
-          <p className="journal-subtitle">Official publication of the University of El Dorado</p>
+          <h1 className="journal-title"><i>JOURNAL SCIENCE EDUCATION</i></h1>
+          <p className="journal-subtitle"><i>Official publication of the University of El Dorado</i></p>
           <div className="journal-divider" />
         </div>
 
@@ -60,7 +60,7 @@ const JournalPortraitPage = forwardRef((props, ref) => {
           </div>
         </div>
 
-        <div className="page-number">— Journal —</div>
+        <div className="page-number">— <i>Journal</i> —</div>
       </div>
     </div>
   );

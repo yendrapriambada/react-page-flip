@@ -54,7 +54,15 @@ const PosterAppsLeftPage = forwardRef(function PosterAppsLeftPage(props, ref) {
             />
           </div>
           <div className="speech-bubble">
-            <p>{displayedText || 'Klik ▶ Play untuk memutar teks'}</p>
+            <p>
+              {displayedText ? (
+                displayedText
+              ) : (
+                <span>
+                  Klik ▶ <i>Play</i> untuk memutar teks
+                </span>
+              )}
+            </p>
           </div>
         </div>
         {!isCompleted && (
@@ -64,7 +72,7 @@ const PosterAppsLeftPage = forwardRef(function PosterAppsLeftPage(props, ref) {
             onClick={handlePlayClick}
             disabled={isPlaying}
           >
-            {isPlaying ? 'Listening...' : '▶ Play'}
+            {isPlaying ? <i>Listening...</i> : <>▶ <i>Play</i></>}
           </button>
         )}
 
@@ -86,7 +94,7 @@ const PosterAppsLeftPage = forwardRef(function PosterAppsLeftPage(props, ref) {
             onTouchStartCapture={stopFlipPropagation}
           >
             <img className="app-logo" src={canvaLogo} alt="Canva" />
-            <span className="app-label">Canva</span>
+            <span className="app-label"><i>Canva</i></span>
           </a>
           <a
             href="https://www.microsoft.com/microsoft-365/publisher"
@@ -98,7 +106,7 @@ const PosterAppsLeftPage = forwardRef(function PosterAppsLeftPage(props, ref) {
             onTouchStartCapture={stopFlipPropagation}
           >
             <img className="app-logo" src={publisherLogo} alt="Microsoft Publisher" />
-            <span className="app-label">Publisher</span>
+            <span className="app-label"><i>Publisher</i></span>
           </a>
           <a
             href="https://piktochart.com/"
@@ -110,7 +118,7 @@ const PosterAppsLeftPage = forwardRef(function PosterAppsLeftPage(props, ref) {
             onTouchStartCapture={stopFlipPropagation}
           >
             <img className="app-logo" src={piktochartLogo} alt="Piktochart" />
-            <span className="app-label">Piktochart</span>
+            <span className="app-label"><i>Piktochart</i></span>
           </a>
         </div>
         <p className="app-note">*klik gambar untuk membuka website</p>

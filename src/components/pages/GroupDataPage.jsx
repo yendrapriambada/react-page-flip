@@ -61,30 +61,32 @@ const GroupDataPage = forwardRef(function GroupDataPage(props, ref) {
               </div>
             </div>
 
-            <p className="group-data-instruction">
-              Berdasarkan data di atas, gambarkan dalam bentuk grafik batang (bar
-              chart) yang menunjukkan hubungan perbandingan volume dan debit air
-              perhari dari 2 kelompok tersebut!
-            </p>
-            <p className="group-data-note">
-              (Silahkan gunakan aplikasi pembuat grafik yang anda biasa gunakan dan
-              ketahui, kemudian unggah (upload) hasil kerja melalui link di bawah
-              ini)
-            </p>
+            <div className="question-input-card">
+              <p className="group-data-instruction">
+                Berdasarkan data di atas, gambarkan dalam bentuk grafik batang (bar
+                chart) yang menunjukkan hubungan perbandingan volume dan debit air
+                perhari dari 2 kelompok tersebut!
+              </p>
+              <p className="group-data-note">
+                (Silahkan gunakan aplikasi pembuat grafik yang anda biasa gunakan dan
+                ketahui, kemudian unggah (upload) hasil kerja melalui link di bawah
+                ini)
+              </p>
 
-            <div className="input-group">
-              <textarea
-                rows={3}
-                className="link-input"
-                placeholder="masukkan link hasil kerja...."
-                value={answers.q3.link}
-                onChange={(e) => setQ3Link(e.target.value)}
-                onPointerDownCapture={stopFlipPropagation}
-                onMouseDownCapture={stopFlipPropagation}
-                onTouchStartCapture={stopFlipPropagation}
-                required
-                autoComplete="off"
-              />
+              <div className="input-group">
+                <textarea
+                  rows={3}
+                  className="link-input"
+                  placeholder="masukkan link hasil kerja...."
+                  value={answers.q3.link}
+                  onChange={(e) => setQ3Link(e.target.value)}
+                  onPointerDownCapture={stopFlipPropagation}
+                  onMouseDownCapture={stopFlipPropagation}
+                  onTouchStartCapture={stopFlipPropagation}
+                  required
+                  autoComplete="off"
+                />
+              </div>
             </div>
         </div>
       </div>

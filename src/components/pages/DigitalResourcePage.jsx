@@ -8,11 +8,6 @@ const SITES = [
     img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/ScienceDirect_logo.svg/512px-ScienceDirect_logo.svg.png',
   },
   {
-    name: 'PubMed',
-    href: 'https://pubmed.ncbi.nlm.nih.gov/',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/PubMedLogo.png/512px-PubMedLogo.png',
-  },
-  {
     name: 'Springer',
     href: 'https://link.springer.com/',
     img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Springer_Nature.svg/512px-Springer_Nature.svg.png',
