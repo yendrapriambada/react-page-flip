@@ -18,7 +18,6 @@ const PosterTaskRightPage = forwardRef(function PosterTaskRightPage(props, ref) 
             yang telah anda buat di bawah ini!
           </h3>
           <div className="evaluation-input-wrapper">
-            <label>Jawaban Anda</label>
             <textarea
               rows={3}
               placeholder="Jawaban Anda..."
